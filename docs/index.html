@@ -213,6 +213,53 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
   </section>
 
   <section>
+    <h2>espaço e texto</h2>
+    <p>Passo de 4 px para espaçamento (<code>--ro-espaco-1</code> a <code>-6</code>: 4, 8, 12, 16, 24, 32) e uma escala curta de texto (<code>--ro-tam-micro</code> 11, <code>-rotulo</code> 12, <code>-pequeno</code> 13, <code>-corpo</code> 16, <code>-destaque</code> 20, <code>-titulo</code> 44). Use os tokens em vez de números soltos.</p>
+  </section>
+
+  <section>
+    <h2>rótulo e cabeçalho</h2>
+    <p>O rótulo em mono marca seções e dá contexto ao título. O cabeçalho de tela leva o título grande e o cursor ▌, uma vez por tela. A variação <code>--barra</code> é a barra de topo compacta, que fica fixa ao rolar.</p>
+    <div class="cartao" style="display:flex;flex-direction:column;gap:16px">
+      <header class="ro-cabecalho">
+        <div class="ro-cabecalho__texto"><p class="ro-rotulo">dom, 22 nov</p><h1 class="ro-cabecalho__titulo">Hoje<span class="ro-cabecalho__cursor" aria-hidden="true">▌</span></h1></div>
+        <div class="ro-cabecalho__acoes"><button class="ro-botao ro-botao--icone" type="button" aria-label="buscar" id="ca-1"></button></div>
+      </header>
+      <header class="ro-cabecalho ro-cabecalho--barra" style="position:static"><button class="ro-botao ro-botao--quieto ro-botao--icone" type="button" aria-label="voltar" id="ca-2"></button><strong class="ro-cabecalho__titulo">Perfil</strong></header>
+<pre>&lt;header class="ro-cabecalho"&gt;
+  &lt;div class="ro-cabecalho__texto"&gt;
+    &lt;p class="ro-rotulo"&gt;dom, 22 nov&lt;/p&gt;
+    &lt;h1 class="ro-cabecalho__titulo"&gt;Hoje&lt;span class="ro-cabecalho__cursor" aria-hidden="true"&gt;▌&lt;/span&gt;&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div class="ro-cabecalho__acoes"&gt;…botões de ícone…&lt;/div&gt;
+&lt;/header&gt;</pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>cartão</h2>
+    <p>Bloco com borda e raio para agrupar conteúdo. <code>--preenchido</code> usa o fundo de superfície; <code>--clicavel</code> serve para o cartão inteiro como link ou botão. Sem sombra.</p>
+    <div class="cartao" style="display:flex;flex-direction:column;gap:12px">
+      <section class="ro-cartao"><p class="ro-rotulo">nenhum hábito ainda</p><p style="margin:8px 0 0">Crie um hábito diário ou de algumas vezes por semana.</p></section>
+      <a class="ro-cartao ro-cartao--preenchido ro-cartao--clicavel" href="#cart"><p class="ro-rotulo">hábitos</p><strong>criar o primeiro</strong></a>
+    </div>
+  </section>
+
+  <section>
+    <h2>barra de navegação</h2>
+    <p>Barra inferior com itens e uma ação central opcional. A página atual leva <code>aria-current="page"</code>. Com <code>ro-barra--lateral</code> ela vira coluna à esquerda a partir de 768 px. Reserve o espaço no fim da página com <code>--ro-barra-altura</code>.</p>
+    <div class="cartao" style="padding:0;overflow:hidden">
+      <nav class="ro-barra" id="ba-1" aria-label="Exemplo" style="position:static">
+        <a class="ro-barra__item" href="#ba" aria-current="page"><span class="ro-barra__icone"></span><span class="ro-barra__nome">hoje</span></a>
+        <a class="ro-barra__item" href="#ba"><span class="ro-barra__icone"><span class="ro-barra__contador">3</span></span><span class="ro-barra__nome">inbox</span></a>
+        <button class="ro-barra__acao" type="button" aria-label="capturar"></button>
+        <a class="ro-barra__item" href="#ba"><span class="ro-barra__icone"></span><span class="ro-barra__nome">mês</span></a>
+        <a class="ro-barra__item" href="#ba"><span class="ro-barra__icone"></span><span class="ro-barra__nome">biblioteca</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <section>
     <h2>folha</h2>
     <p>Painel que sobe de baixo no celular (diálogo centrado em tela larga). Serve para menu de ações de um item ou para um formulário curto. ESC e toque no fundo fecham; destrutivo por último; sempre “Cancelar”.</p>
     <div class="cartao">
@@ -242,6 +289,9 @@ abrirFolha({ titulo: 'Livro', itens: [
   document.getElementById('fo-1').onclick = () => abrirFolha({ titulo: 'Torto Arado', itens: [{ rotulo: 'Copiar título', icone: 'copy', aoClicar: () => aviso('Copiado') }, { rotulo: 'Marcar como lido', icone: 'check', aoClicar: () => aviso('Marcado') }, { rotulo: 'Tirar da lista', perigo: true, aoClicar: () => aviso('Removido (de mentira)') }] });
   import { icone } from '../dist/icones.js';
   document.querySelectorAll('#fx .ro-faixa').forEach((f, i) => f.prepend(icone(i ? 'clock' : 'warn', 20)));
+  document.querySelector('#ca-1').append(icone('search', 20)); document.querySelector('#ca-2').append(icone('back', 22));
+  document.querySelectorAll('#ba-1 .ro-barra__icone').forEach((el, i) => el.prepend(icone(['home', 'notifications', 'clock', 'bookmark'][i], 24)));
+  document.querySelector('#ba-1 .ro-barra__acao').append(icone('add', 26));
   import { confirmar } from '../dist/confirmar.js';
   confirmar(document.getElementById('apagar'), () => aviso('Apagado (de mentira)'), { rotulo: 'toque de novo para apagar' });
   document.getElementById('av-1').onclick = () => aviso('Nota salva');

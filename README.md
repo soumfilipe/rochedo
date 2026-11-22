@@ -13,6 +13,10 @@ Documentação ao vivo: `docs/index.html` (publicada no GitHub Pages, em `/docs/
 | Aviso (JS) | `dist/aviso.js` | `aviso(texto, { tipo, duracao, acao })` |
 | Confirmar (JS) | `dist/confirmar.js` | `confirmar(botao, aoConfirmar, { rotulo, tempo })`: dois toques |
 | Folha (JS) | `dist/folha.js` + `folha.css` | `abrirFolha({ titulo, itens, conteudo })`: menu de ações ou formulário curto |
+| Rótulo | `rotulo.css` | `.ro-rotulo`: rótulo de seção em mono |
+| Cabeçalho | `cabecalho.css` | `.ro-cabecalho`: título de tela com cursor ▌; `--barra` para a barra de topo |
+| Cartão | `cartao.css` | `.ro-cartao` (`--preenchido`, `--clicavel`) |
+| Barra | `barra.css` | `.ro-barra`: navegação inferior com ação central; `--lateral` a partir de 768 px |
 | Seletor | `seletor.css` | `.ro-seletor`: `select` nativo estilizado; `--compacto` para uso em frase |
 | Faixa | `faixa.css` | `.ro-faixa` (`--erro`): mensagem fixa até o problema passar, com ação opcional |
 | Ícones | `dist/icones.js` | Hugeicons (versão gratuita, MIT): `icone(nome, tamanho)` devolve um `<svg>` |
@@ -27,7 +31,7 @@ Todo nome começa com `ro-` (`--ro-acento`, `.ro-abas`), para não colidir com o
 **Com build** (ex.: Life OS):
 
 ```sh
-npm i github:soumfilipe/rochedo#v0.10.0
+npm i github:soumfilipe/rochedo#v0.11.0
 ```
 
 ```js

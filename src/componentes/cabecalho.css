@@ -1,0 +1,51 @@
+/* Cabeçalho de tela: rótulo pequeno, título grande e o cursor ▌ (uma vez por tela), com ações opcionais à direita.
+   <header class="ro-cabecalho">
+     <div class="ro-cabecalho__texto">
+       <p class="ro-rotulo">dom, 22 nov</p>
+       <h1 class="ro-cabecalho__titulo">Hoje<span class="ro-cabecalho__cursor" aria-hidden="true">▌</span></h1>
+     </div>
+     <div class="ro-cabecalho__acoes"><a class="ro-botao ro-botao--icone" …/></div>
+   </header>
+   Variação --barra: barra de topo compacta (voltar + título), fica fixa ao rolar:
+   <header class="ro-cabecalho ro-cabecalho--barra"><button class="ro-botao ro-botao--quieto ro-botao--icone">←</button><strong class="ro-cabecalho__titulo">Perfil</strong></header> */
+.ro-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ro-espaco-3);
+}
+.ro-cabecalho__texto { min-width: 0; }
+.ro-cabecalho__titulo {
+  margin: var(--ro-espaco-1) 0 0;
+  font: 800 var(--ro-tam-titulo)/1 var(--ro-fonte-titulo);
+  letter-spacing: -2px;
+  overflow-wrap: anywhere;
+}
+.ro-cabecalho__cursor { color: var(--ro-acento); animation: ro-piscar 1.1s steps(1) infinite; }
+.ro-cabecalho__acoes { flex: none; display: flex; gap: var(--ro-espaco-2); }
+@keyframes ro-piscar { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .ro-cabecalho__cursor { animation: none; } }
+
+.ro-cabecalho--barra {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  box-sizing: border-box;
+  height: 48px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--ro-espaco-2);
+  padding: 0 var(--ro-espaco-3);
+  background: var(--ro-fundo);
+  border-bottom: 1px solid var(--ro-borda);
+}
+.ro-cabecalho--barra .ro-cabecalho__titulo {
+  min-width: 0;
+  margin: 0;
+  font: 700 var(--ro-tam-corpo)/1.2 var(--ro-fonte-titulo);
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ro-cabecalho--barra .ro-cabecalho__acoes { margin-left: auto; }

@@ -32,6 +32,22 @@
   --ro-raio-pilula: 999px;
   --ro-alvo: 44px; /* altura mínima de qualquer alvo de toque */
 
+  /* espaçamento (passo de 4 px; use estes em vez de números soltos) */
+  --ro-espaco-1: 4px;
+  --ro-espaco-2: 8px;
+  --ro-espaco-3: 12px;
+  --ro-espaco-4: 16px;
+  --ro-espaco-5: 24px;
+  --ro-espaco-6: 32px;
+
+  /* escala de texto */
+  --ro-tam-micro: 11px; /* nomes da barra, contadores */
+  --ro-tam-rotulo: 12px; /* rótulos em mono */
+  --ro-tam-pequeno: 13px; /* ajuda, subtítulos, botões */
+  --ro-tam-corpo: 16px; /* texto corrido e campos (nunca menos nos campos: o iOS dá zoom) */
+  --ro-tam-destaque: 20px;
+  --ro-tam-titulo: 44px; /* título de tela */
+
   /* movimento */
   --ro-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ro-rapido: 150ms;

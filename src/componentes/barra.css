@@ -1,0 +1,99 @@
+/* Barra de navegação inferior, com uma ação central opcional. Cada item é um link; a página atual leva aria-current="page".
+   <nav class="ro-barra" aria-label="Navegação principal">
+     <a class="ro-barra__item" href="/hoje" aria-current="page">
+       <span class="ro-barra__icone"><svg …/><span class="ro-barra__contador">3</span></span>
+       <span class="ro-barra__nome">hoje</span>
+     </a>
+     <button class="ro-barra__acao" aria-label="capturar"><svg …/></button>
+     …
+   </nav>
+   Reserve o espaço no fim da página com padding-bottom: calc(var(--ro-barra-altura) + env(safe-area-inset-bottom)).
+   ro-barra--lateral: a partir de 768 px vira coluna à esquerda (a ação sobe para o topo). */
+:root { --ro-barra-altura: 64px; }
+.ro-barra {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  height: calc(var(--ro-barra-altura) + env(safe-area-inset-bottom));
+  padding: 6px var(--ro-espaco-2) env(safe-area-inset-bottom);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: color-mix(in srgb, var(--ro-fundo) 92%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--ro-borda);
+}
+.ro-barra__item {
+  flex: 1;
+  max-width: 96px;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ro-espaco-1);
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 12px;
+  color: var(--ro-apoio);
+  font: 400 var(--ro-tam-micro)/1 var(--ro-fonte-mono);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-barra__item[aria-current='page'] { color: var(--ro-acento); font-weight: 700; }
+.ro-barra__item:focus-visible, .ro-barra__acao:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
+.ro-barra__icone { position: relative; display: flex; }
+.ro-barra__contador {
+  position: absolute;
+  top: -6px;
+  left: 14px;
+  min-width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ro-raio-pilula);
+  background: var(--ro-acento);
+  color: var(--ro-sobre-acento);
+  font: 700 10px/1 var(--ro-fonte-mono);
+}
+.ro-barra__acao {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ro-raio-pilula);
+  background: var(--ro-acento);
+  color: var(--ro-sobre-acento);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--ro-rapido) var(--ro-easing);
+}
+.ro-barra__acao:active { transform: scale(0.94); }
+@media (min-width: 768px) {
+  .ro-barra--lateral {
+    top: 0;
+    right: auto;
+    width: 104px;
+    height: auto;
+    padding: var(--ro-espaco-6) 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--ro-espaco-3);
+    border-top: 0;
+    border-right: 1px solid var(--ro-borda);
+  }
+  .ro-barra--lateral .ro-barra__item { flex: none; width: 72px; max-width: none; }
+  .ro-barra--lateral .ro-barra__acao { order: -1; margin-bottom: var(--ro-espaco-4); }
+}

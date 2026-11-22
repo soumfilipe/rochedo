@@ -1,0 +1,9 @@
+/* Rótulo de seção: mono, caixa alta, 12 px, cor de apoio. "INBOX · 7 ITENS".
+   <p class="ro-rotulo">hábitos</p>   (ou <h2 class="ro-rotulo">). O rótulo de campo é outro: .ro-campo__rotulo. */
+.ro-rotulo {
+  margin: 0;
+  font: 400 var(--ro-tam-rotulo)/1.2 var(--ro-fonte-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ro-apoio);
+}

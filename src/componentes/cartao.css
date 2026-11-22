@@ -1,0 +1,18 @@
+/* Cartão: bloco com borda e raio para agrupar conteúdo.
+   <section class="ro-cartao">…</section>
+   <a class="ro-cartao ro-cartao--clicavel" href="…">…</a>       inteiro clicável (a ou button)
+   <div class="ro-cartao ro-cartao--preenchido">…</div>          fundo de superfície, para destacar do fundo
+   Sem sombra. Dentro dele, o espaço entre filhos é por conta de quem usa (gap). */
+.ro-cartao {
+  box-sizing: border-box;
+  padding: var(--ro-espaco-4) 18px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-card);
+  background: transparent;
+  color: var(--ro-texto);
+  text-decoration: none;
+}
+.ro-cartao--preenchido { background: var(--ro-superficie); }
+.ro-cartao--clicavel { display: block; width: 100%; text-align: left; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.ro-cartao--clicavel:active { background: var(--ro-superficie-2); }
+.ro-cartao--clicavel:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
