@@ -1,0 +1,30 @@
+/* Faixa: mensagem que fica na tela até o problema passar (diferente do aviso, que some sozinho).
+   Serve para falha de sincronização, formulário com erro, conexão perdida.
+   <div class="ro-faixa ro-faixa--erro" role="alert">
+     <svg class="ro-icone">…</svg>                       ícone opcional (icone('warn', 20))
+     <p class="ro-faixa__texto"><strong class="ro-faixa__titulo">não sincronizou</strong>sem conexão com o servidor.</p>
+     <button class="ro-botao ro-botao--quieto">tentar de novo</button>   ação opcional
+   </div>
+   Sem modificador, a faixa é informativa (role="status"). Erro usa role="alert".
+   Regras: diga o que aconteceu e o que fazer a seguir; cor nunca é o único sinal (título e ícone também). */
+.ro-faixa {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-campo);
+  background: var(--ro-superficie-2);
+  color: var(--ro-texto);
+  font: 400 14px/1.4 var(--ro-fonte-titulo);
+}
+.ro-faixa > .ro-icone { flex: none; color: var(--ro-apoio); }
+.ro-faixa__texto { flex: 1 1 16ch; min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.ro-faixa__titulo { display: block; font-weight: 700; }
+.ro-faixa > .ro-botao { flex: none; margin-left: auto; color: var(--ro-texto); font-weight: 700; }
+.ro-faixa--erro {
+  border-color: var(--ro-perigo);
+  background: color-mix(in srgb, var(--ro-perigo) 10%, var(--ro-superficie));
+}
+.ro-faixa--erro > .ro-icone, .ro-faixa--erro .ro-faixa__titulo { color: var(--ro-perigo); }

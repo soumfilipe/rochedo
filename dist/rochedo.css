@@ -1,4 +1,4 @@
-/* Rochedo 0.8.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
+/* Rochedo 0.9.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
 /* Bricolage Grotesque (títulos e texto) e JetBrains Mono (rótulos, handles, horários), licença OFL. */
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400; font-display: swap; src: url('fontes/bricolage-grotesque-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-display: swap; src: url('fontes/bricolage-grotesque-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -321,6 +321,37 @@ label.ro-chip { position: relative; }
 .ro-carregando > i:nth-child(3) { width: 55%; animation-delay: 0.3s; }
 @keyframes ro-pulsa { 50% { opacity: 0.45; } }
 @media (prefers-reduced-motion: reduce) { .ro-carregando > i { animation: none; } }
+
+/* Faixa: mensagem que fica na tela até o problema passar (diferente do aviso, que some sozinho).
+   Serve para falha de sincronização, formulário com erro, conexão perdida.
+   <div class="ro-faixa ro-faixa--erro" role="alert">
+     <svg class="ro-icone">…</svg>                       ícone opcional (icone('warn', 20))
+     <p class="ro-faixa__texto"><strong class="ro-faixa__titulo">não sincronizou</strong>sem conexão com o servidor.</p>
+     <button class="ro-botao ro-botao--quieto">tentar de novo</button>   ação opcional
+   </div>
+   Sem modificador, a faixa é informativa (role="status"). Erro usa role="alert".
+   Regras: diga o que aconteceu e o que fazer a seguir; cor nunca é o único sinal (título e ícone também). */
+.ro-faixa {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-campo);
+  background: var(--ro-superficie-2);
+  color: var(--ro-texto);
+  font: 400 14px/1.4 var(--ro-fonte-titulo);
+}
+.ro-faixa > .ro-icone { flex: none; color: var(--ro-apoio); }
+.ro-faixa__texto { flex: 1 1 16ch; min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.ro-faixa__titulo { display: block; font-weight: 700; }
+.ro-faixa > .ro-botao { flex: none; margin-left: auto; color: var(--ro-texto); font-weight: 700; }
+.ro-faixa--erro {
+  border-color: var(--ro-perigo);
+  background: color-mix(in srgb, var(--ro-perigo) 10%, var(--ro-superficie));
+}
+.ro-faixa--erro > .ro-icone, .ro-faixa--erro .ro-faixa__titulo { color: var(--ro-perigo); }
 
 /* Folha: painel que sobe de baixo (celular) ou vira diálogo centrado (tela larga).
    Dois usos: lista de ações (menu de um item) e conteúdo livre (formulário curto).

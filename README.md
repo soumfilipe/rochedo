@@ -13,6 +13,7 @@ Documentação ao vivo: `docs/index.html` (publicada no GitHub Pages, em `/docs/
 | Aviso (JS) | `dist/aviso.js` | `aviso(texto, { tipo, duracao, acao })` |
 | Confirmar (JS) | `dist/confirmar.js` | `confirmar(botao, aoConfirmar, { rotulo, tempo })`: dois toques |
 | Folha (JS) | `dist/folha.js` + `folha.css` | `abrirFolha({ titulo, itens, conteudo })`: menu de ações ou formulário curto |
+| Faixa | `faixa.css` | `.ro-faixa` (`--erro`): mensagem fixa até o problema passar, com ação opcional |
 | Ícones | `dist/icones.js` | Hugeicons (versão gratuita, MIT): `icone(nome, tamanho)` devolve um `<svg>` |
 | Componentes | `dist/rochedo.css` | tudo junto (fontes + variáveis + componentes). Hoje: **abas**, **linha de lista**, **chips de filtro**, **selo**, **botões**, **campos**, **interruptor**, **aviso rápido**, **estados** (vazio/erro/carregando) e **ação destrutiva** |
 
@@ -25,7 +26,7 @@ Todo nome começa com `ro-` (`--ro-acento`, `.ro-abas`), para não colidir com o
 **Com build** (ex.: Life OS):
 
 ```sh
-npm i github:soumfilipe/rochedo#v0.8.0
+npm i github:soumfilipe/rochedo#v0.9.0
 ```
 
 ```js
