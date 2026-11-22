@@ -28,7 +28,7 @@
 <main>
   <header>
     <div class="barra">
-      <h2 style="margin:0">rochedo · v0.5</h2>
+      <h2 style="margin:0">rochedo · v0.6</h2>
       <button class="botao" id="tema" type="button">tema: auto</button>
     </div>
     <h1>Rochedo</h1>
@@ -149,10 +149,41 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
   </section>
 
   <section>
+    <h2>linha de lista</h2>
+    <p>Item de uma lista: início (ícone ou capa), corpo com título e detalhe em mono, fim (selo ou seta). Mínimo de 56 px, separadas por filete, sem cartão.</p>
+    <div class="cartao">
+      <ul class="ro-lista">
+        <li><a class="ro-linha" href="#linhas"><span class="ro-linha__corpo"><span class="ro-linha__titulo">Torto Arado</span><span class="ro-linha__sub">Itamar Vieira Junior · 2019</span></span><span class="ro-linha__fim"><span class="ro-selo ro-selo--acento">lendo</span></span></a></li>
+        <li><button class="ro-linha" type="button"><span class="ro-linha__corpo"><span class="ro-linha__titulo">Quarto de despejo</span><span class="ro-linha__sub">Carolina Maria de Jesus · 1960</span></span><span class="ro-linha__fim"><span class="ro-selo">12</span></span></button></li>
+        <li><div class="ro-linha"><span class="ro-linha__corpo"><span class="ro-linha__titulo">Sem ação</span></span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>chips de filtro</h2>
+    <p>Recortam uma lista que já está na tela. Mudar de tela é aba, não chip.</p>
+    <div class="cartao">
+      <div class="ro-chips" id="chips">
+        <button class="ro-chip" type="button" aria-pressed="true">todos</button>
+        <button class="ro-chip" type="button" aria-pressed="false">lendo</button>
+        <button class="ro-chip" type="button" aria-pressed="false">lidos <span class="ro-selo">8</span></button>
+        <button class="ro-chip" type="button" aria-pressed="false">abandonados</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>selo</h2>
+    <p>Contador ou etiqueta curta; só informa, não é tocável.</p>
+    <div class="cartao"><div style="display:flex;gap:8px;align-items:center"><span class="ro-selo">3</span><span class="ro-selo ro-selo--acento">novo</span><span class="ro-selo ro-selo--perigo">atrasado</span></div></div>
+  </section>
+
+  <section>
     <h2>como usar</h2>
     <ul>
       <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>
-      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.5.0</code> e <code>import 'rochedo'</code>.</li>
+      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.6.0</code> e <code>import 'rochedo'</code>.</li>
       <li>Ícones: <code>import { icone } from 'rochedo/icones.js'</code>.</li>
       <li>Tema: automático pela preferência do sistema, ou <code>&lt;html data-tema="claro|escuro"&gt;</code>.</li>
     </ul>
@@ -161,6 +192,7 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
 <script type="module">
   import { aviso } from '../dist/aviso.js';
   document.getElementById('sw1').addEventListener('click', (e) => e.currentTarget.setAttribute('aria-checked', e.currentTarget.getAttribute('aria-checked') === 'true' ? 'false' : 'true'));
+  document.querySelectorAll('#chips .ro-chip').forEach((c) => c.addEventListener('click', () => { document.querySelectorAll('#chips .ro-chip').forEach((x) => x.setAttribute('aria-pressed', 'false')); c.setAttribute('aria-pressed', 'true'); }));
   import { confirmar } from '../dist/confirmar.js';
   confirmar(document.getElementById('apagar'), () => aviso('Apagado (de mentira)'), { rotulo: 'toque de novo para apagar' });
   document.getElementById('av-1').onclick = () => aviso('Nota salva');

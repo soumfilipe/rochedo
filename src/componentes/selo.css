@@ -1,0 +1,19 @@
+/* Selo: contador ou etiqueta curta ao lado de um título ou ícone.
+   <span class="ro-selo">3</span>   <span class="ro-selo ro-selo--acento">novo</span>   <span class="ro-selo ro-selo--perigo">atrasado</span>
+   Só informa; não é tocável. Se precisar de toque, use .ro-chip. */
+.ro-selo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: var(--ro-raio-pilula);
+  background: var(--ro-superficie-2);
+  color: var(--ro-texto-forte-apoio);
+  font: 700 11px/1 var(--ro-fonte-mono);
+  letter-spacing: 0.02em;
+  box-sizing: border-box;
+}
+.ro-selo--acento { background: var(--ro-acento); color: var(--ro-sobre-acento); }
+.ro-selo--perigo { background: transparent; border: 1px solid var(--ro-perigo); color: var(--ro-perigo); }

@@ -1,0 +1,23 @@
+/* Chip de filtro: escolhe um recorte dentro de uma lista (não navega entre telas: isso é .ro-abas).
+   <button class="ro-chip" aria-pressed="true">lendo</button>
+   Vários ficam num <div class="ro-chips"> que quebra linha. O estado ligado vem de aria-pressed="true". */
+.ro-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ro-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-pilula);
+  background: transparent;
+  color: var(--ro-texto-forte-apoio);
+  font: 400 13px/1 var(--ro-fonte-mono);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--ro-rapido) var(--ro-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-chip[aria-pressed='true'] { background: var(--ro-texto); border-color: var(--ro-texto); color: var(--ro-fundo); font-weight: 700; }
+.ro-chip:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
+.ro-chip:disabled { opacity: 0.45; cursor: not-allowed; }

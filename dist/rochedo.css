@@ -1,4 +1,4 @@
-/* Rochedo 0.5.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
+/* Rochedo 0.6.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
 /* Bricolage Grotesque (títulos e texto) e JetBrains Mono (rótulos, handles, horários), licença OFL. */
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400; font-display: swap; src: url('fontes/bricolage-grotesque-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-display: swap; src: url('fontes/bricolage-grotesque-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -254,6 +254,30 @@ textarea.ro-entrada { min-height: 96px; resize: vertical; }
 .ro-entrada[aria-invalid='true'] { border-color: var(--ro-perigo); }
 .ro-entrada:disabled { opacity: 0.55; }
 
+/* Chip de filtro: escolhe um recorte dentro de uma lista (não navega entre telas: isso é .ro-abas).
+   <button class="ro-chip" aria-pressed="true">lendo</button>
+   Vários ficam num <div class="ro-chips"> que quebra linha. O estado ligado vem de aria-pressed="true". */
+.ro-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ro-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-pilula);
+  background: transparent;
+  color: var(--ro-texto-forte-apoio);
+  font: 400 13px/1 var(--ro-fonte-mono);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--ro-rapido) var(--ro-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-chip[aria-pressed='true'] { background: var(--ro-texto); border-color: var(--ro-texto); color: var(--ro-fundo); font-weight: 700; }
+.ro-chip:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
+.ro-chip:disabled { opacity: 0.45; cursor: not-allowed; }
+
 /* Estados de uma lista ou tela: vazio, erro e carregando.
    Vazio:   <div class="ro-estado"><p class="ro-estado__titulo">nenhuma nota ainda</p><p>capture com – no início da linha.</p></div>
    Erro:    <div class="ro-estado ro-estado--erro" role="alert"> … <button>tentar de novo</button></div>
@@ -326,6 +350,41 @@ textarea.ro-entrada { min-height: 96px; resize: vertical; }
 .ro-interruptor:disabled { opacity: 0.45; cursor: not-allowed; }
 @media (prefers-reduced-motion: reduce) { .ro-interruptor, .ro-interruptor::after { transition: none; } }
 
+/* Linha de lista: item de uma lista de itens (nota, livro, pessoa, ajuste).
+   <ul class="ro-lista">
+     <li><a class="ro-linha" href="…">
+       <span class="ro-linha__inicio">(ícone, avatar ou capa)</span>
+       <span class="ro-linha__corpo"><span class="ro-linha__titulo">Torto Arado</span><span class="ro-linha__sub">Itamar Vieira Junior · 2019</span></span>
+       <span class="ro-linha__fim">(selo, hora ou seta)</span>
+     </a></li>
+   </ul>
+   Serve em <a>, <button> ou <div>. Altura mínima de 56 px (cabe dois níveis de texto); separadas por filete, sem cartão. */
+.ro-lista { margin: 0; padding: 0; list-style: none; }
+.ro-lista > li + li { border-top: 1px solid var(--ro-borda); }
+.ro-linha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 0;
+  border: 0;
+  background: none;
+  color: var(--ro-texto);
+  font: 400 16px/1.3 var(--ro-fonte-titulo);
+  text-align: left;
+  text-decoration: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+a.ro-linha, button.ro-linha { cursor: pointer; }
+a.ro-linha:active, button.ro-linha:active { opacity: 0.7; }
+.ro-linha:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; border-radius: var(--ro-raio-campo); }
+.ro-linha__inicio, .ro-linha__fim { flex: none; display: inline-flex; align-items: center; color: var(--ro-apoio); }
+.ro-linha__corpo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.ro-linha__titulo { font-weight: 700; overflow-wrap: anywhere; }
+.ro-linha__sub { font: 400 12px/1.3 var(--ro-fonte-mono); color: var(--ro-apoio); overflow-wrap: anywhere; }
+
 /* Ação destrutiva: botão em cor de perigo e o estado "confirmando" do confirmar() (rochedo/confirmar.js).
    Regra: apagar algo que dá para desfazer → aviso com "desfazer" (aviso.js); o que não dá → dois toques. */
 .ro-perigo {
@@ -341,3 +400,23 @@ textarea.ro-entrada { min-height: 96px; resize: vertical; }
 .ro-perigo[data-confirmando] { background: var(--ro-perigo); color: var(--ro-fundo); animation: ro-sacode 200ms var(--ro-easing); }
 @keyframes ro-sacode { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 @media (prefers-reduced-motion: reduce) { .ro-perigo[data-confirmando] { animation: none; } }
+
+/* Selo: contador ou etiqueta curta ao lado de um título ou ícone.
+   <span class="ro-selo">3</span>   <span class="ro-selo ro-selo--acento">novo</span>   <span class="ro-selo ro-selo--perigo">atrasado</span>
+   Só informa; não é tocável. Se precisar de toque, use .ro-chip. */
+.ro-selo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: var(--ro-raio-pilula);
+  background: var(--ro-superficie-2);
+  color: var(--ro-texto-forte-apoio);
+  font: 700 11px/1 var(--ro-fonte-mono);
+  letter-spacing: 0.02em;
+  box-sizing: border-box;
+}
+.ro-selo--acento { background: var(--ro-acento); color: var(--ro-sobre-acento); }
+.ro-selo--perigo { background: transparent; border: 1px solid var(--ro-perigo); color: var(--ro-perigo); }
