@@ -24,7 +24,7 @@ Todo nome começa com `ro-` (`--ro-acento`, `.ro-abas`), para não colidir com o
 **Com build** (ex.: Life OS):
 
 ```sh
-npm i github:soumfilipe/rochedo#v0.4.0
+npm i github:soumfilipe/rochedo#v0.5.0
 ```
 
 ```js

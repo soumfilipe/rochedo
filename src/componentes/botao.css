@@ -1,7 +1,9 @@
 /* Botões. Sempre pílula, no mínimo 44 px de alto, rótulo em mono.
    <button class="ro-botao">           secundário (contorno)
    <button class="ro-botao ro-botao--principal">   uma ação principal por tela
-   <button class="ro-botao ro-botao--quieto">      terciário, só texto
+   <button class="ro-botao ro-botao--quieto">      terciário: só texto em cor de apoio, sem borda
+   <button class="ro-botao ro-botao--link">        ação em texto na cor de acento
+   Sobre fundo de acento (cartão destacado): some ro-botao--invertido ao principal ou ao padrão.
    <button class="ro-botao ro-botao--perigo">      apagar, sair (combine com confirmar.js)
    <button class="ro-botao ro-botao--icone" aria-label="…">  só ícone, 44 × 44
    Largura cheia: ro-botao--cheio. Desativado: atributo disabled (ou aria-disabled). */
@@ -27,7 +29,10 @@
 .ro-botao:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
 .ro-botao:disabled, .ro-botao[aria-disabled='true'] { opacity: 0.45; cursor: not-allowed; }
 .ro-botao--principal { background: var(--ro-acento); border-color: var(--ro-acento); color: var(--ro-sobre-acento); }
-.ro-botao--quieto { border-color: transparent; color: var(--ro-acento); }
+.ro-botao--quieto { border-color: transparent; padding: 0 8px; color: var(--ro-apoio); font-weight: 400; }
+.ro-botao--link { border-color: transparent; padding: 0 8px; color: var(--ro-acento); }
+.ro-botao--invertido { border: 2px solid var(--ro-sobre-acento); background: transparent; color: inherit; }
+.ro-botao--invertido.ro-botao--principal { border-color: var(--ro-sobre-acento); background: var(--ro-sobre-acento); color: var(--ro-acento); }
 .ro-botao--perigo, .ro-perigo { border-color: var(--ro-perigo); color: var(--ro-perigo); }
 .ro-botao--perigo[data-confirmando] { background: var(--ro-perigo); color: var(--ro-fundo); }
 .ro-botao--icone { width: var(--ro-alvo); padding: 0; }

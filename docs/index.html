@@ -28,7 +28,7 @@
 <main>
   <header>
     <div class="barra">
-      <h2 style="margin:0">rochedo · v0.4</h2>
+      <h2 style="margin:0">rochedo · v0.5</h2>
       <button class="botao" id="tema" type="button">tema: auto</button>
     </div>
     <h1>Rochedo</h1>
@@ -114,11 +114,16 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="ro-botao ro-botao--principal" type="button">salvar</button>
         <button class="ro-botao" type="button">cancelar</button>
-        <button class="ro-botao ro-botao--quieto" type="button">saiba mais</button>
+        <button class="ro-botao ro-botao--quieto" type="button">voltar</button>
+        <button class="ro-botao ro-botao--link" type="button">saiba mais</button>
         <button class="ro-botao ro-botao--perigo" type="button">apagar</button>
         <button class="ro-botao" type="button" disabled>desativado</button>
       </div>
       <button class="ro-botao ro-botao--principal ro-botao--cheio" type="button">largura cheia</button>
+      <div style="display:flex;gap:8px;padding:14px;border-radius:var(--ro-raio-card);background:var(--ro-acento);color:var(--ro-sobre-acento)">
+        <button class="ro-botao ro-botao--invertido ro-botao--principal" type="button">marcar</button>
+        <button class="ro-botao ro-botao--invertido" type="button">escrever</button>
+      </div>
 <pre>&lt;button class="ro-botao ro-botao--principal"&gt;salvar&lt;/button&gt;</pre>
     </div>
   </section>
@@ -147,7 +152,7 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
     <h2>como usar</h2>
     <ul>
       <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>
-      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.4.0</code> e <code>import 'rochedo'</code>.</li>
+      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.5.0</code> e <code>import 'rochedo'</code>.</li>
       <li>Ícones: <code>import { icone } from 'rochedo/icones.js'</code>.</li>
       <li>Tema: automático pela preferência do sistema, ou <code>&lt;html data-tema="claro|escuro"&gt;</code>.</li>
     </ul>
