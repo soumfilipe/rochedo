@@ -1,0 +1,33 @@
+/* Campos de formulário.
+   <label class="ro-campo">
+     <span class="ro-campo__rotulo">título</span>
+     <input class="ro-entrada" type="text" />        (também textarea e select)
+     <span class="ro-campo__ajuda">como aparece na lista</span>
+   </label>
+   Erro: aria-invalid="true" na entrada e <span class="ro-campo__erro" role="alert">…</span>.
+   Rótulo sempre visível (nada de placeholder no lugar dele). 16 px no mínimo na entrada: abaixo disso o iOS dá zoom ao focar. */
+.ro-campo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ro-campo__rotulo {
+  font: 400 12px/1.2 var(--ro-fonte-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ro-apoio);
+}
+.ro-campo__ajuda { font: 400 13px/1.35 var(--ro-fonte-titulo); color: var(--ro-apoio); }
+.ro-campo__erro { font: 400 13px/1.35 var(--ro-fonte-titulo); color: var(--ro-perigo); }
+.ro-entrada {
+  width: 100%;
+  min-height: var(--ro-alvo);
+  padding: 10px 14px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-campo);
+  background: var(--ro-superficie);
+  color: var(--ro-texto);
+  font: 400 16px/1.4 var(--ro-fonte-titulo);
+  box-sizing: border-box;
+}
+textarea.ro-entrada { min-height: 96px; resize: vertical; }
+.ro-entrada::placeholder { color: var(--ro-apoio); }
+.ro-entrada:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 0; border-color: transparent; }
+.ro-entrada[aria-invalid='true'] { border-color: var(--ro-perigo); }
+.ro-entrada:disabled { opacity: 0.55; }

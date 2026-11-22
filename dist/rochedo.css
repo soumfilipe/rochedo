@@ -1,4 +1,4 @@
-/* Rochedo 0.3.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
+/* Rochedo 0.4.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
 /* Bricolage Grotesque (títulos e texto) e JetBrains Mono (rótulos, handles, horários), licença OFL. */
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400; font-display: swap; src: url('fontes/bricolage-grotesque-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-display: swap; src: url('fontes/bricolage-grotesque-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -180,6 +180,75 @@
 @keyframes ro-aviso-entra { from { opacity: 0; transform: translateY(8px); } }
 @media (prefers-reduced-motion: reduce) { .ro-aviso { animation: none; } .ro-aviso--saindo { transition: none; } }
 
+/* Botões. Sempre pílula, no mínimo 44 px de alto, rótulo em mono.
+   <button class="ro-botao">           secundário (contorno)
+   <button class="ro-botao ro-botao--principal">   uma ação principal por tela
+   <button class="ro-botao ro-botao--quieto">      terciário, só texto
+   <button class="ro-botao ro-botao--perigo">      apagar, sair (combine com confirmar.js)
+   <button class="ro-botao ro-botao--icone" aria-label="…">  só ícone, 44 × 44
+   Largura cheia: ro-botao--cheio. Desativado: atributo disabled (ou aria-disabled). */
+.ro-botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--ro-alvo);
+  padding: 0 18px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-pilula);
+  background: transparent;
+  color: var(--ro-texto);
+  font: 700 13px/1 var(--ro-fonte-mono);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--ro-rapido) var(--ro-easing), opacity var(--ro-rapido);
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-botao:active { opacity: 0.8; }
+.ro-botao:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
+.ro-botao:disabled, .ro-botao[aria-disabled='true'] { opacity: 0.45; cursor: not-allowed; }
+.ro-botao--principal { background: var(--ro-acento); border-color: var(--ro-acento); color: var(--ro-sobre-acento); }
+.ro-botao--quieto { border-color: transparent; color: var(--ro-acento); }
+.ro-botao--perigo, .ro-perigo { border-color: var(--ro-perigo); color: var(--ro-perigo); }
+.ro-botao--perigo[data-confirmando] { background: var(--ro-perigo); color: var(--ro-fundo); }
+.ro-botao--icone { width: var(--ro-alvo); padding: 0; }
+.ro-botao--cheio { display: flex; width: 100%; }
+
+/* Campos de formulário.
+   <label class="ro-campo">
+     <span class="ro-campo__rotulo">título</span>
+     <input class="ro-entrada" type="text" />        (também textarea e select)
+     <span class="ro-campo__ajuda">como aparece na lista</span>
+   </label>
+   Erro: aria-invalid="true" na entrada e <span class="ro-campo__erro" role="alert">…</span>.
+   Rótulo sempre visível (nada de placeholder no lugar dele). 16 px no mínimo na entrada: abaixo disso o iOS dá zoom ao focar. */
+.ro-campo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ro-campo__rotulo {
+  font: 400 12px/1.2 var(--ro-fonte-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ro-apoio);
+}
+.ro-campo__ajuda { font: 400 13px/1.35 var(--ro-fonte-titulo); color: var(--ro-apoio); }
+.ro-campo__erro { font: 400 13px/1.35 var(--ro-fonte-titulo); color: var(--ro-perigo); }
+.ro-entrada {
+  width: 100%;
+  min-height: var(--ro-alvo);
+  padding: 10px 14px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-campo);
+  background: var(--ro-superficie);
+  color: var(--ro-texto);
+  font: 400 16px/1.4 var(--ro-fonte-titulo);
+  box-sizing: border-box;
+}
+textarea.ro-entrada { min-height: 96px; resize: vertical; }
+.ro-entrada::placeholder { color: var(--ro-apoio); }
+.ro-entrada:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 0; border-color: transparent; }
+.ro-entrada[aria-invalid='true'] { border-color: var(--ro-perigo); }
+.ro-entrada:disabled { opacity: 0.55; }
+
 /* Estados de uma lista ou tela: vazio, erro e carregando.
    Vazio:   <div class="ro-estado"><p class="ro-estado__titulo">nenhuma nota ainda</p><p>capture com – no início da linha.</p></div>
    Erro:    <div class="ro-estado ro-estado--erro" role="alert"> … <button>tentar de novo</button></div>
@@ -214,6 +283,43 @@
 .ro-carregando > i:nth-child(3) { width: 55%; animation-delay: 0.3s; }
 @keyframes ro-pulsa { 50% { opacity: 0.45; } }
 @media (prefers-reduced-motion: reduce) { .ro-carregando > i { animation: none; } }
+
+/* Interruptor: liga/desliga algo que vale na hora (sem botão "salvar").
+   <button class="ro-interruptor" role="switch" aria-checked="false" aria-label="notificações"></button>
+   ou <input class="ro-interruptor" type="checkbox" role="switch" aria-label="…">.
+   Coloque o rótulo ao lado, numa linha de 44 px de altura; o toque vale para a linha toda (use <label>). */
+.ro-interruptor {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex: none;
+  width: 52px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-pilula);
+  background: var(--ro-superficie-2);
+  cursor: pointer;
+  transition: background var(--ro-rapido) var(--ro-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-interruptor::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ro-texto-forte-apoio);
+  transition: transform var(--ro-rapido) var(--ro-easing), background var(--ro-rapido);
+}
+.ro-interruptor[aria-checked='true'], .ro-interruptor:checked { background: var(--ro-acento); border-color: var(--ro-acento); }
+.ro-interruptor[aria-checked='true']::after, .ro-interruptor:checked::after { transform: translateX(20px); background: var(--ro-sobre-acento); }
+.ro-interruptor:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
+.ro-interruptor:disabled { opacity: 0.45; cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) { .ro-interruptor, .ro-interruptor::after { transition: none; } }
 
 /* Ação destrutiva: botão em cor de perigo e o estado "confirmando" do confirmar() (rochedo/confirmar.js).
    Regra: apagar algo que dá para desfazer → aviso com "desfazer" (aviso.js); o que não dá → dois toques. */

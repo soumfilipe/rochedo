@@ -28,7 +28,7 @@
 <main>
   <header>
     <div class="barra">
-      <h2 style="margin:0">rochedo · v0.3</h2>
+      <h2 style="margin:0">rochedo · v0.4</h2>
       <button class="botao" id="tema" type="button">tema: auto</button>
     </div>
     <h1>Rochedo</h1>
@@ -108,10 +108,46 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
   </section>
 
   <section>
+    <h2>botões</h2>
+    <p>Sempre pílula, 44 px no mínimo, rótulo em mono. Uma ação principal por tela; o resto é secundário ou quieto.</p>
+    <div class="cartao">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="ro-botao ro-botao--principal" type="button">salvar</button>
+        <button class="ro-botao" type="button">cancelar</button>
+        <button class="ro-botao ro-botao--quieto" type="button">saiba mais</button>
+        <button class="ro-botao ro-botao--perigo" type="button">apagar</button>
+        <button class="ro-botao" type="button" disabled>desativado</button>
+      </div>
+      <button class="ro-botao ro-botao--principal ro-botao--cheio" type="button">largura cheia</button>
+<pre>&lt;button class="ro-botao ro-botao--principal"&gt;salvar&lt;/button&gt;</pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>campos</h2>
+    <p>Rótulo sempre visível, nunca no lugar do rótulo um placeholder. Entrada com 16 px para o iOS não dar zoom. Erro com <code>aria-invalid</code> e texto de apoio.</p>
+    <div class="cartao">
+      <label class="ro-campo"><span class="ro-campo__rotulo">título</span><input class="ro-entrada" type="text" value="Torto Arado"><span class="ro-campo__ajuda">como aparece na lista</span></label>
+      <label class="ro-campo"><span class="ro-campo__rotulo">páginas</span><input class="ro-entrada" type="number" aria-invalid="true" value="-3"><span class="ro-campo__erro" role="alert">precisa ser maior que zero</span></label>
+      <label class="ro-campo"><span class="ro-campo__rotulo">anotação</span><textarea class="ro-entrada" placeholder="escreva aqui"></textarea></label>
+    </div>
+  </section>
+
+  <section>
+    <h2>interruptor</h2>
+    <p>Liga ou desliga algo que vale na hora, sem botão “salvar”. A linha toda é o alvo de toque.</p>
+    <div class="cartao">
+      <label style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px"><span>notificações</span><button class="ro-interruptor" id="sw1" type="button" role="switch" aria-checked="true"></button></label>
+      <label style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px"><span>sincronizar só no wi-fi</span><input class="ro-interruptor" type="checkbox" role="switch"></label>
+<pre>&lt;button class="ro-interruptor" role="switch" aria-checked="true"&gt;&lt;/button&gt;</pre>
+    </div>
+  </section>
+
+  <section>
     <h2>como usar</h2>
     <ul>
       <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>
-      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.3.0</code> e <code>import 'rochedo'</code>.</li>
+      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.4.0</code> e <code>import 'rochedo'</code>.</li>
       <li>Ícones: <code>import { icone } from 'rochedo/icones.js'</code>.</li>
       <li>Tema: automático pela preferência do sistema, ou <code>&lt;html data-tema="claro|escuro"&gt;</code>.</li>
     </ul>
@@ -119,6 +155,7 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
 </main>
 <script type="module">
   import { aviso } from '../dist/aviso.js';
+  document.getElementById('sw1').addEventListener('click', (e) => e.currentTarget.setAttribute('aria-checked', e.currentTarget.getAttribute('aria-checked') === 'true' ? 'false' : 'true'));
   import { confirmar } from '../dist/confirmar.js';
   confirmar(document.getElementById('apagar'), () => aviso('Apagado (de mentira)'), { rotulo: 'toque de novo para apagar' });
   document.getElementById('av-1').onclick = () => aviso('Nota salva');
