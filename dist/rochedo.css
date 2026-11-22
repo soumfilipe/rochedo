@@ -1,4 +1,4 @@
-/* Rochedo 0.7.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
+/* Rochedo 0.8.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
 /* Bricolage Grotesque (títulos e texto) e JetBrains Mono (rótulos, handles, horários), licença OFL. */
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400; font-display: swap; src: url('fontes/bricolage-grotesque-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-display: swap; src: url('fontes/bricolage-grotesque-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -321,6 +321,84 @@ label.ro-chip { position: relative; }
 .ro-carregando > i:nth-child(3) { width: 55%; animation-delay: 0.3s; }
 @keyframes ro-pulsa { 50% { opacity: 0.45; } }
 @media (prefers-reduced-motion: reduce) { .ro-carregando > i { animation: none; } }
+
+/* Folha: painel que sobe de baixo (celular) ou vira diálogo centrado (tela larga).
+   Dois usos: lista de ações (menu de um item) e conteúdo livre (formulário curto).
+   Em JS: abrirFolha() de rochedo/folha.js. Em marcação própria:
+   <dialog class="ro-folha" aria-labelledby="t"><div class="ro-folha__conteudo">
+     <div class="ro-folha__topo"><h2 id="t" class="ro-folha__titulo">título</h2><button class="ro-folha__fechar" aria-label="fechar">×</button></div>
+     <button class="ro-folha__item">ação</button> …
+   </div></dialog>
+   Regras: ESC e toque no fundo fecham; ação destrutiva usa .ro-folha__item--perigo e vem por último; sempre há "Cancelar". */
+.ro-folha {
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  margin: auto auto 0;
+  padding: 0;
+  border: 1px solid var(--ro-borda);
+  border-bottom: 0;
+  border-radius: 24px 24px 0 0;
+  background: var(--ro-superficie);
+  color: var(--ro-texto);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.ro-folha[open] { animation: ro-folha-sobe var(--ro-medio) var(--ro-easing); }
+.ro-folha::backdrop { background: rgb(0 0 0 / 0.55); }
+@keyframes ro-folha-sobe { from { transform: translateY(100%); } }
+.ro-folha__conteudo { display: flex; flex-direction: column; gap: 4px; padding: 12px 12px calc(16px + env(safe-area-inset-bottom, 0px)); }
+.ro-folha__topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 8px 4px 12px; }
+.ro-folha__titulo {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 400 12px/1.2 var(--ro-fonte-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ro-apoio);
+}
+.ro-folha__fechar {
+  flex: none;
+  width: var(--ro-alvo);
+  height: var(--ro-alvo);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--ro-raio-pilula);
+  background: transparent;
+  color: var(--ro-apoio);
+  cursor: pointer;
+}
+.ro-folha__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--ro-raio-campo);
+  background: none;
+  color: var(--ro-texto);
+  font: 400 17px/1.2 var(--ro-fonte-titulo);
+  text-align: left;
+  text-decoration: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-folha__item:active { background: var(--ro-superficie-2); }
+.ro-folha__item:focus-visible, .ro-folha__fechar:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 0; }
+.ro-folha__item--perigo { color: var(--ro-perigo); }
+.ro-folha__item--cancelar { justify-content: center; margin-top: 6px; background: var(--ro-superficie-2); font-weight: 700; }
+@media (min-width: 768px) {
+  .ro-folha { margin: auto; border-bottom: 1px solid var(--ro-borda); border-radius: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .ro-folha[open] { animation: none; } }
 
 /* Interruptor: liga/desliga algo que vale na hora (sem botão "salvar").
    <button class="ro-interruptor" role="switch" aria-checked="false" aria-label="notificações"></button>

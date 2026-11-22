@@ -28,7 +28,7 @@
 <main>
   <header>
     <div class="barra">
-      <h2 style="margin:0">rochedo · v0.7</h2>
+      <h2 style="margin:0">rochedo · v0.8</h2>
       <button class="botao" id="tema" type="button">tema: auto</button>
     </div>
     <h1>Rochedo</h1>
@@ -186,10 +186,22 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
   </section>
 
   <section>
+    <h2>folha</h2>
+    <p>Painel que sobe de baixo no celular (diálogo centrado em tela larga). Serve para menu de ações de um item ou para um formulário curto. ESC e toque no fundo fecham; destrutivo por último; sempre “Cancelar”.</p>
+    <div class="cartao">
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="botao" id="fo-1" type="button">menu de ações</button></div>
+<pre>import { abrirFolha } from 'rochedo/folha.js';
+abrirFolha({ titulo: 'Livro', itens: [
+  { rotulo: 'Editar', icone: 'edit', aoClicar: editar },
+  { rotulo: 'Excluir', perigo: true, aoClicar: apagar } ] });</pre>
+    </div>
+  </section>
+
+  <section>
     <h2>como usar</h2>
     <ul>
       <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>
-      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.7.0</code> e <code>import 'rochedo'</code>.</li>
+      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.8.0</code> e <code>import 'rochedo'</code>.</li>
       <li>Ícones: <code>import { icone } from 'rochedo/icones.js'</code>.</li>
       <li>Tema: automático pela preferência do sistema, ou <code>&lt;html data-tema="claro|escuro"&gt;</code>.</li>
     </ul>
@@ -199,6 +211,8 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
   import { aviso } from '../dist/aviso.js';
   document.getElementById('sw1').addEventListener('click', (e) => e.currentTarget.setAttribute('aria-checked', e.currentTarget.getAttribute('aria-checked') === 'true' ? 'false' : 'true'));
   document.querySelectorAll('#chips .ro-chip').forEach((c) => c.addEventListener('click', () => { document.querySelectorAll('#chips .ro-chip').forEach((x) => x.setAttribute('aria-pressed', 'false')); c.setAttribute('aria-pressed', 'true'); }));
+  import { abrirFolha } from '../dist/folha.js';
+  document.getElementById('fo-1').onclick = () => abrirFolha({ titulo: 'Torto Arado', itens: [{ rotulo: 'Copiar título', icone: 'copy', aoClicar: () => aviso('Copiado') }, { rotulo: 'Marcar como lido', icone: 'check', aoClicar: () => aviso('Marcado') }, { rotulo: 'Tirar da lista', perigo: true, aoClicar: () => aviso('Removido (de mentira)') }] });
   import { confirmar } from '../dist/confirmar.js';
   confirmar(document.getElementById('apagar'), () => aviso('Apagado (de mentira)'), { rotulo: 'toque de novo para apagar' });
   document.getElementById('av-1').onclick = () => aviso('Nota salva');

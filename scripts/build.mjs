@@ -22,4 +22,5 @@ cpSync(join(src, 'fontes'), join(dist, 'fontes'), { recursive: true });
 cpSync(join(src, 'icones.js'), join(dist, 'icones.js'));
 cpSync(join(src, 'aviso.js'), join(dist, 'aviso.js'));
 cpSync(join(src, 'confirmar.js'), join(dist, 'confirmar.js'));
+cpSync(join(src, 'folha.js'), join(dist, 'folha.js'));
 console.log(`rochedo ${versao}: dist/ gerado (${componentes.length} componente(s)).`);
