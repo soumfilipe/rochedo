@@ -317,6 +317,18 @@ abrirFolha({ titulo: 'Livro', itens: [
   </section>
 
   <section>
+    <h2>svelte</h2>
+    <p>Os componentes com comportamento também existem para Svelte 5, em <code>rochedo/svelte</code>. O resto é só CSS: use as classes <code>.ro-*</code> direto. O aviso rápido não tem componente, porque <code>aviso()</code> já funciona dentro do Svelte.</p>
+<pre>import { Abas, BotaoConfirmar, Folha, Icone, Interruptor } from 'rochedo/svelte';
+
+&lt;Abas itens={[{ id: 'notas', rotulo: 'notas' }, { id: 'ideias', rotulo: 'ideias', contagem: 3 }]} bind:valor={aba} nome="coleções" /&gt;
+&lt;Interruptor bind:marcado={notificar} rotulo="notificações" /&gt;
+&lt;BotaoConfirmar aoConfirmar={apagar}&gt;apagar&lt;/BotaoConfirmar&gt;
+&lt;Folha bind:aberta titulo="Livro" itens={[{ rotulo: 'Editar', icone: 'edit', aoClicar: editar }]} /&gt;</pre>
+    <p><code>Abas</code> troca de aba com as setas; <code>Folha</code> fecha com ESC e toque no fundo e tem <code>cancelar</code>, <code>href</code> e <code>manterAberta</code> nos itens como a versão em JS. Requer <code>svelte@^5</code>.</p>
+  </section>
+
+  <section>
     <h2>como usar</h2>
     <ul>
       <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>

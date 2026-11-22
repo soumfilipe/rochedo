@@ -1,9 +1,13 @@
 {
   "name": "rochedo",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Rochedo: design system de Filipe Costa (variáveis, fontes, ícones e componentes em CSS puro).",
   "type": "module",
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src",
+    "svelte"
+  ],
   "exports": {
     ".": "./dist/rochedo.css",
     "./tokens.css": "./dist/tokens.css",
@@ -13,12 +17,30 @@
     "./aviso.js": "./dist/aviso.js",
     "./confirmar.js": "./dist/confirmar.js",
     "./folha.js": "./dist/folha.js",
-    "./fontes/*": "./dist/fontes/*"
+    "./fontes/*": "./dist/fontes/*",
+    "./svelte": {
+      "svelte": "./svelte/index.js",
+      "default": "./svelte/index.js"
+    }
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node scripts/build.mjs && git diff --exit-code -- dist"
+    "check": "node scripts/build.mjs && node scripts/checar-svelte.mjs && git diff --exit-code -- dist"
   },
-  "repository": { "type": "git", "url": "git+https://github.com/soumfilipe/rochedo.git" },
-  "license": "UNLICENSED"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soumfilipe/rochedo.git"
+  },
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "svelte": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "svelte": "^5.0.0"
+  }
 }

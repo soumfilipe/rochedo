@@ -21,6 +21,7 @@ Documentação ao vivo: `docs/index.html` (publicada no GitHub Pages, em `/docs/
 | Progresso | `progresso.css` | `.ro-progresso` sobre `<progress>`; `--feito` |
 | Fab | `fab.css` | `.ro-fab`: ação principal flutuante |
 | Barra de ações | `barra-acoes.css` | `.ro-barra-acoes`: rodapé de formulário |
+| Svelte | `svelte/` | `import { Abas, BotaoConfirmar, Folha, Icone, Interruptor } from 'rochedo/svelte'` (Svelte 5) |
 | Barra | `barra.css` | `.ro-barra`: navegação inferior com ação central; `--lateral` a partir de 768 px |
 | Seletor | `seletor.css` | `.ro-seletor`: `select` nativo estilizado; `--compacto` para uso em frase |
 | Faixa | `faixa.css` | `.ro-faixa` (`--erro`): mensagem fixa até o problema passar, com ação opcional |
