@@ -1,0 +1,74 @@
+/* Rochedo 0.1.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
+/* Rochedo — tokens. Tema escuro é o padrão; o claro vem pela preferência do sistema
+   ou forçado com <html data-tema="claro"> / <html data-tema="escuro">. */
+:root {
+  /* paleta */
+  --ro-noite: #0b0a10;
+  --ro-nevoa: #f4f1fa;
+  --ro-roxo: #b994ff;
+  --ro-profundo: #5b3fd1;
+  --ro-erro: #b3194f;
+  --ro-sucesso: #17714b;
+
+  /* papéis (escuro) */
+  --ro-fundo: var(--ro-noite);
+  --ro-superficie: #17151f;
+  --ro-superficie-2: #211e2c;
+  --ro-texto: var(--ro-nevoa);
+  --ro-texto-forte-apoio: #c9c4d8;
+  --ro-apoio: #8d88a0;
+  --ro-borda: #2a2735;
+  --ro-acento: var(--ro-roxo);
+  --ro-sobre-acento: var(--ro-noite);
+  --ro-foco: var(--ro-roxo);
+  --ro-perigo: #ff7aa8; /* texto de erro legível sobre fundo escuro (o #b3194f puro não passa 4,5:1 ali) */
+
+  /* tipografia */
+  --ro-fonte-titulo: 'Bricolage Grotesque', system-ui, sans-serif;
+  --ro-fonte-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* forma e toque */
+  --ro-raio-card: 22px;
+  --ro-raio-campo: 14px;
+  --ro-raio-pilula: 999px;
+  --ro-alvo: 44px; /* altura mínima de qualquer alvo de toque */
+
+  /* movimento */
+  --ro-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ro-rapido: 150ms;
+  --ro-medio: 300ms;
+
+  color-scheme: dark;
+}
+
+/* papéis (claro) — repetidos de propósito: CSS não permite reaproveitar um bloco entre @media e atributo */
+@media (prefers-color-scheme: light) {
+  :root:not([data-tema='escuro']) {
+    --ro-fundo: var(--ro-nevoa);
+    --ro-superficie: #ffffff;
+    --ro-superficie-2: #ebe7f5;
+    --ro-texto: var(--ro-noite);
+    --ro-texto-forte-apoio: #3d3850;
+    --ro-apoio: #6b6680;
+    --ro-borda: #d9d3ea;
+    --ro-acento: var(--ro-profundo);
+    --ro-sobre-acento: var(--ro-nevoa);
+    --ro-foco: var(--ro-profundo);
+    --ro-perigo: var(--ro-erro);
+    color-scheme: light;
+  }
+}
+:root[data-tema='claro'] {
+  --ro-fundo: var(--ro-nevoa);
+  --ro-superficie: #ffffff;
+  --ro-superficie-2: #ebe7f5;
+  --ro-texto: var(--ro-noite);
+  --ro-texto-forte-apoio: #3d3850;
+  --ro-apoio: #6b6680;
+  --ro-borda: #d9d3ea;
+  --ro-acento: var(--ro-profundo);
+  --ro-sobre-acento: var(--ro-nevoa);
+  --ro-foco: var(--ro-profundo);
+  --ro-perigo: var(--ro-erro);
+  color-scheme: light;
+}

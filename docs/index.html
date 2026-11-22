@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rochedo · design system</title>
+<link rel="stylesheet" href="../dist/rochedo.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ro-fundo); color: var(--ro-texto); font-family: var(--ro-fonte-titulo); -webkit-font-smoothing: antialiased; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; display: flex; flex-direction: column; gap: 40px; }
+  h1 { margin: 0; font-size: 44px; font-weight: 800; letter-spacing: -0.02em; }
+  h2 { margin: 0 0 12px; font-family: var(--ro-fonte-mono); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ro-apoio); }
+  p { margin: 0 0 12px; color: var(--ro-texto-forte-apoio); line-height: 1.5; }
+  code, .mono { font-family: var(--ro-fonte-mono); font-size: 13px; }
+  .barra { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .botao { min-height: var(--ro-alvo); padding: 0 18px; border: 1px solid var(--ro-borda); border-radius: var(--ro-raio-pilula); background: transparent; color: var(--ro-texto); font: 700 13px var(--ro-fonte-mono); cursor: pointer; }
+  .cores { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .cor { border: 1px solid var(--ro-borda); border-radius: var(--ro-raio-campo); overflow: hidden; background: var(--ro-superficie); }
+  .cor i { display: block; height: 52px; }
+  .cor span { display: block; padding: 8px 10px; font: 12px var(--ro-fonte-mono); color: var(--ro-texto-forte-apoio); overflow-wrap: anywhere; }
+  .cartao { padding: 18px; border: 1px solid var(--ro-borda); border-radius: var(--ro-raio-card); background: var(--ro-superficie); display: flex; flex-direction: column; gap: 14px; }
+  pre { margin: 0; padding: 14px; border-radius: var(--ro-raio-campo); background: var(--ro-superficie-2); overflow-x: auto; font: 12px/1.5 var(--ro-fonte-mono); color: var(--ro-texto-forte-apoio); }
+  ul { margin: 0; padding-left: 20px; color: var(--ro-texto-forte-apoio); line-height: 1.6; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="barra">
+      <h2 style="margin:0">rochedo · v0.1</h2>
+      <button class="botao" id="tema" type="button">tema: auto</button>
+    </div>
+    <h1>Rochedo</h1>
+    <p>Design system do Paquiderme, do Life OS e dos próximos projetos. CSS puro: variáveis, fontes, ícones e componentes, sem depender de framework.</p>
+  </header>
+
+  <section>
+    <h2>cores</h2>
+    <div class="cores" id="cores"></div>
+  </section>
+
+  <section>
+    <h2>tipografia</h2>
+    <div class="cartao">
+      <div style="font-size:40px;font-weight:800;letter-spacing:-0.02em">Bricolage Grotesque</div>
+      <p style="margin:0">Títulos e texto corrido, em 400, 700 e 800.</p>
+      <div class="mono" style="font-size:16px;font-weight:700">JetBrains Mono · rótulos, handles, horários</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>abas</h2>
+    <p>Navegação entre vistas irmãs da mesma tela. Trilho em pílula de 44 px, itens mono de 36 px, aba atual no acento. Filtros dentro de uma lista não são abas.</p>
+    <div class="cartao">
+      <nav class="ro-abas" id="abas-1" aria-label="exemplo">
+        <button type="button" aria-selected="true">notas</button>
+        <button type="button">ideias</button>
+        <button type="button">temas</button>
+        <button type="button">feeds <span class="ro-contagem">3</span></button>
+        <button type="button">leituras</button>
+        <button type="button">objetivos</button>
+        <button type="button">pessoas</button>
+      </nav>
+      <nav class="ro-abas ro-abas--cheia" id="abas-2" aria-label="exemplo cheio">
+        <a href="#abas" aria-current="page">destaques</a>
+        <a href="#abas">todas</a>
+      </nav>
+<pre>&lt;nav class="ro-abas" aria-label="coleções"&gt;
+  &lt;a href="?aba=notas" aria-current="page"&gt;notas&lt;/a&gt;
+  &lt;a href="?aba=ideias"&gt;ideias&lt;/a&gt;
+&lt;/nav&gt;</pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>como usar</h2>
+    <ul>
+      <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>
+      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.1.0</code> e <code>import 'rochedo'</code>.</li>
+      <li>Ícones: <code>import { icone } from 'rochedo/icones.js'</code>.</li>
+      <li>Tema: automático pela preferência do sistema, ou <code>&lt;html data-tema="claro|escuro"&gt;</code>.</li>
+    </ul>
+  </section>
+</main>
+<script>
+  // paleta lida das variáveis, para a página nunca mentir sobre os valores
+  const nomes = ['fundo','superficie','superficie-2','texto','texto-forte-apoio','apoio','borda','acento','sobre-acento','perigo','roxo','profundo','sucesso'];
+  const cores = document.getElementById('cores');
+  const desenhar = () => {
+    cores.replaceChildren();
+    const cs = getComputedStyle(document.documentElement);
+    for (const n of nomes) {
+      const d = document.createElement('div'); d.className = 'cor';
+      d.innerHTML = `<i style="background:var(--ro-${n})"></i><span>--ro-${n}<br>${cs.getPropertyValue('--ro-' + n).trim() || '—'}</span>`;
+      cores.append(d);
+    }
+  };
+  desenhar();
+  const ordem = [null, 'claro', 'escuro'];
+  document.getElementById('tema').addEventListener('click', (e) => {
+    const atual = document.documentElement.dataset.tema || null;
+    const prox = ordem[(ordem.indexOf(atual) + 1) % ordem.length];
+    if (prox) document.documentElement.dataset.tema = prox; else delete document.documentElement.dataset.tema;
+    e.currentTarget.textContent = 'tema: ' + (prox || 'auto');
+    desenhar();
+  });
+  document.querySelectorAll('#abas-1 button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('#abas-1 button').forEach((x) => x.removeAttribute('aria-selected'));
+    b.setAttribute('aria-selected', 'true');
+  }));
+  document.querySelectorAll('#abas-2 a').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('#abas-2 a').forEach((x) => x.removeAttribute('aria-current'));
+    a.setAttribute('aria-current', 'page');
+  }));
+</script>
+</body>
+</html>

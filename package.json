@@ -1,0 +1,20 @@
+{
+  "name": "rochedo",
+  "version": "0.1.0",
+  "description": "Rochedo: design system de Filipe Costa (variáveis, fontes, ícones e componentes em CSS puro).",
+  "type": "module",
+  "files": ["dist", "src"],
+  "exports": {
+    ".": "./dist/rochedo.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./fontes.css": "./dist/fontes.css",
+    "./icones.js": "./dist/icones.js",
+    "./fontes/*": "./dist/fontes/*"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs && git diff --exit-code -- dist"
+  },
+  "repository": { "type": "git", "url": "git+https://github.com/soumfilipe/rochedo.git" },
+  "license": "UNLICENSED"
+}

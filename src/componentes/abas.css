@@ -1,0 +1,48 @@
+/* Abas — navegação entre vistas irmãs de uma mesma tela.
+   Marcação: <nav class="ro-abas"> com <a>, <button> ou qualquer filho; a atual leva
+   aria-current="page", aria-selected="true" ou a classe .ativa.
+   Modificador .ro-abas--cheia: poucas abas dividem a largura toda.
+   Se os itens não couberem, só o trilho rola na horizontal; o JS do projeto traz a aba atual para a vista. */
+.ro-abas {
+  display: flex;
+  gap: 4px;
+  align-self: flex-start;
+  min-width: 0;
+  max-width: 100%;
+  padding: 4px;
+  border: 1px solid var(--ro-borda);
+  border-radius: var(--ro-raio-pilula);
+  overflow-x: auto;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.ro-abas::-webkit-scrollbar { display: none; }
+.ro-abas > * {
+  flex: none;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--ro-raio-pilula);
+  background: transparent;
+  color: var(--ro-texto-forte-apoio);
+  font-family: var(--ro-fonte-mono);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--ro-rapido) var(--ro-easing);
+}
+.ro-abas > [aria-current='page'],
+.ro-abas > [aria-selected='true'],
+.ro-abas > .ativa {
+  background: var(--ro-acento);
+  color: var(--ro-sobre-acento);
+}
+.ro-abas > * .ro-contagem { opacity: 0.75; font-weight: 400; }
+.ro-abas--cheia { align-self: stretch; }
+.ro-abas--cheia > * { flex: 1; }

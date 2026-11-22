@@ -1,0 +1,15 @@
+name: ci
+on:
+  push:
+    branches: [principal]
+  pull_request:
+jobs:
+  checar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # dist/ é versionado (os projetos instalam direto do GitHub): precisa estar em dia com src/
+      - run: npm run check
