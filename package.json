@@ -1,6 +1,6 @@
 {
   "name": "rochedo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rochedo: design system de Filipe Costa (variáveis, fontes, ícones e componentes em CSS puro).",
   "type": "module",
   "files": ["dist", "src"],
@@ -8,7 +8,9 @@
     ".": "./dist/rochedo.css",
     "./tokens.css": "./dist/tokens.css",
     "./fontes.css": "./dist/fontes.css",
+    "./rochedo.css": "./dist/rochedo.css",
     "./icones.js": "./dist/icones.js",
+    "./aviso.js": "./dist/aviso.js",
     "./fontes/*": "./dist/fontes/*"
   },
   "scripts": {

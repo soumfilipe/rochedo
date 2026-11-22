@@ -10,8 +10,9 @@ Documentação ao vivo: `docs/index.html` (publicada no GitHub Pages, em `/docs/
 | --- | --- | --- |
 | Variáveis | `dist/tokens.css` | cores (escuro e claro), tipografia, raios, alvo de toque (44 px), movimento |
 | Fontes | `dist/fontes.css` + `dist/fontes/` | Bricolage Grotesque e JetBrains Mono (OFL), servidas localmente |
+| Aviso (JS) | `dist/aviso.js` | `aviso(texto, { tipo, duracao, acao })` |
 | Ícones | `dist/icones.js` | Hugeicons (versão gratuita, MIT): `icone(nome, tamanho)` devolve um `<svg>` |
-| Componentes | `dist/rochedo.css` | tudo junto (fontes + variáveis + componentes). Hoje: **abas** |
+| Componentes | `dist/rochedo.css` | tudo junto (fontes + variáveis + componentes). Hoje: **abas** e **aviso rápido** (`aviso.css`) |
 
 Todo nome começa com `ro-` (`--ro-acento`, `.ro-abas`), para não colidir com o CSS do projeto.
 
@@ -22,7 +23,7 @@ Todo nome começa com `ro-` (`--ro-acento`, `.ro-abas`), para não colidir com o
 **Com build** (ex.: Life OS):
 
 ```sh
-npm i github:soumfilipe/rochedo#v0.1.0
+npm i github:soumfilipe/rochedo#v0.2.0
 ```
 
 ```js
@@ -56,7 +57,7 @@ Cada mudança sai com tag semântica (`v0.2.0`). Projetos fixam a versão e só 
 
 ## Próximos componentes
 
-Aviso rápido (toast), faixa de aviso, confirmação de ação destrutiva, estados vazio/erro/carregamento, botões, campos e interruptor, linha de lista, chips de filtro, selo/contador.
+Faixa de aviso, confirmação de ação destrutiva, estados vazio/erro/carregamento, botões, campos e interruptor, linha de lista, chips de filtro, selo/contador.
 
 ## Licenças
 

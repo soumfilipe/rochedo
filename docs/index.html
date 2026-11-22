@@ -28,7 +28,7 @@
 <main>
   <header>
     <div class="barra">
-      <h2 style="margin:0">rochedo · v0.1</h2>
+      <h2 style="margin:0">rochedo · v0.2</h2>
       <button class="botao" id="tema" type="button">tema: auto</button>
     </div>
     <h1>Rochedo</h1>
@@ -74,16 +74,34 @@
   </section>
 
   <section>
+    <h2>aviso rápido</h2>
+    <p>Confirma uma ação sem tirar a pessoa do lugar. Um por vez, some sozinho (3,5 s; 6 s se tiver ação ou for erro). Para apagar, prefira aviso com “desfazer” a pedir confirmação. Erro vai com <code>tipo: 'erro'</code>.</p>
+    <div class="cartao">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="botao" id="av-1" type="button">simples</button>
+        <button class="botao" id="av-2" type="button">com desfazer</button>
+        <button class="botao" id="av-3" type="button">erro</button>
+      </div>
+<pre>import { aviso } from 'rochedo/aviso.js';
+aviso('Nota apagada', { acao: { rotulo: 'desfazer', aoClicar: restaurar } });</pre>
+    </div>
+  </section>
+
+  <section>
     <h2>como usar</h2>
     <ul>
       <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>
-      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.1.0</code> e <code>import 'rochedo'</code>.</li>
+      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.2.0</code> e <code>import 'rochedo'</code>.</li>
       <li>Ícones: <code>import { icone } from 'rochedo/icones.js'</code>.</li>
       <li>Tema: automático pela preferência do sistema, ou <code>&lt;html data-tema="claro|escuro"&gt;</code>.</li>
     </ul>
   </section>
 </main>
-<script>
+<script type="module">
+  import { aviso } from '../dist/aviso.js';
+  document.getElementById('av-1').onclick = () => aviso('Nota salva');
+  document.getElementById('av-2').onclick = () => aviso('Nota apagada', { acao: { rotulo: 'desfazer', aoClicar: () => aviso('Restaurada') } });
+  document.getElementById('av-3').onclick = () => aviso('Não foi possível salvar', { tipo: 'erro' });
   // paleta lida das variáveis, para a página nunca mentir sobre os valores
   const nomes = ['fundo','superficie','superficie-2','texto','texto-forte-apoio','apoio','borda','acento','sobre-acento','perigo','roxo','profundo','sucesso'];
   const cores = document.getElementById('cores');
