@@ -1,0 +1,15 @@
+/* Ação destrutiva: botão em cor de perigo e o estado "confirmando" do confirmar() (rochedo/confirmar.js).
+   Regra: apagar algo que dá para desfazer → aviso com "desfazer" (aviso.js); o que não dá → dois toques. */
+.ro-perigo {
+  min-height: var(--ro-alvo);
+  padding: 0 18px;
+  border: 1px solid var(--ro-perigo);
+  border-radius: var(--ro-raio-pilula);
+  background: transparent;
+  color: var(--ro-perigo);
+  font: 700 13px var(--ro-fonte-mono);
+  cursor: pointer;
+}
+.ro-perigo[data-confirmando] { background: var(--ro-perigo); color: var(--ro-fundo); animation: ro-sacode 200ms var(--ro-easing); }
+@keyframes ro-sacode { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+@media (prefers-reduced-motion: reduce) { .ro-perigo[data-confirmando] { animation: none; } }

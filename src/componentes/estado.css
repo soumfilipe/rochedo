@@ -1,0 +1,34 @@
+/* Estados de uma lista ou tela: vazio, erro e carregando.
+   Vazio:   <div class="ro-estado"><p class="ro-estado__titulo">nenhuma nota ainda</p><p>capture com – no início da linha.</p></div>
+   Erro:    <div class="ro-estado ro-estado--erro" role="alert"> … <button>tentar de novo</button></div>
+   Carregando: <div class="ro-carregando" aria-busy="true" aria-label="carregando"><i></i><i></i><i></i></div>
+   Regras: diga o que aconteceu e o que fazer a seguir; no erro, sempre ofereça "tentar de novo". */
+.ro-estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--ro-apoio);
+  font: 400 15px/1.45 var(--ro-fonte-titulo);
+}
+.ro-estado > * { margin: 0; max-width: 32ch; }
+.ro-estado__titulo { color: var(--ro-texto); font-weight: 700; font-size: 17px; }
+.ro-estado .ro-icone { color: var(--ro-apoio); margin-bottom: 4px; }
+.ro-estado button, .ro-estado a { margin-top: 8px; }
+.ro-estado--erro .ro-estado__titulo, .ro-estado--erro .ro-icone { color: var(--ro-perigo); }
+
+/* esqueleto: linhas que pulsam, no lugar do conteúdo que ainda não chegou */
+.ro-carregando { display: flex; flex-direction: column; gap: 12px; padding: 8px 0; }
+.ro-carregando > i {
+  display: block;
+  height: 16px;
+  border-radius: var(--ro-raio-pilula);
+  background: var(--ro-superficie-2);
+  animation: ro-pulsa 1.2s ease-in-out infinite;
+}
+.ro-carregando > i:nth-child(2) { width: 80%; animation-delay: 0.15s; }
+.ro-carregando > i:nth-child(3) { width: 55%; animation-delay: 0.3s; }
+@keyframes ro-pulsa { 50% { opacity: 0.45; } }
+@media (prefers-reduced-motion: reduce) { .ro-carregando > i { animation: none; } }

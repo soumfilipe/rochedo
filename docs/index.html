@@ -28,7 +28,7 @@
 <main>
   <header>
     <div class="barra">
-      <h2 style="margin:0">rochedo · v0.2</h2>
+      <h2 style="margin:0">rochedo · v0.3</h2>
       <button class="botao" id="tema" type="button">tema: auto</button>
     </div>
     <h1>Rochedo</h1>
@@ -88,10 +88,30 @@ aviso('Nota apagada', { acao: { rotulo: 'desfazer', aoClicar: restaurar } });</p
   </section>
 
   <section>
+    <h2>estados: vazio, erro, carregando</h2>
+    <p>Diga o que aconteceu e o que fazer a seguir. No erro, sempre ofereça “tentar de novo”. Carregando usa esqueleto no lugar do conteúdo, não um círculo girando.</p>
+    <div class="cartao">
+      <div class="ro-estado"><p class="ro-estado__titulo">nenhuma nota ainda</p><p>capture com – no início da linha ou toque em + nova nota.</p></div>
+      <div class="ro-estado ro-estado--erro" role="alert"><p class="ro-estado__titulo">não deu para carregar</p><p>sem conexão com o servidor.</p><button class="botao" type="button">tentar de novo</button></div>
+      <div class="ro-carregando" aria-busy="true" aria-label="carregando"><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>ação destrutiva</h2>
+    <p>Dá para desfazer? Use o aviso com “desfazer”. Não dá? Dois toques no próprio botão, sem janela de confirmação.</p>
+    <div class="cartao">
+      <div><button class="ro-perigo" id="apagar" type="button">apagar tudo</button></div>
+<pre>import { confirmar } from 'rochedo/confirmar.js';
+confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pre>
+    </div>
+  </section>
+
+  <section>
     <h2>como usar</h2>
     <ul>
       <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>
-      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.2.0</code> e <code>import 'rochedo'</code>.</li>
+      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.3.0</code> e <code>import 'rochedo'</code>.</li>
       <li>Ícones: <code>import { icone } from 'rochedo/icones.js'</code>.</li>
       <li>Tema: automático pela preferência do sistema, ou <code>&lt;html data-tema="claro|escuro"&gt;</code>.</li>
     </ul>
@@ -99,6 +119,8 @@ aviso('Nota apagada', { acao: { rotulo: 'desfazer', aoClicar: restaurar } });</p
 </main>
 <script type="module">
   import { aviso } from '../dist/aviso.js';
+  import { confirmar } from '../dist/confirmar.js';
+  confirmar(document.getElementById('apagar'), () => aviso('Apagado (de mentira)'), { rotulo: 'toque de novo para apagar' });
   document.getElementById('av-1').onclick = () => aviso('Nota salva');
   document.getElementById('av-2').onclick = () => aviso('Nota apagada', { acao: { rotulo: 'desfazer', aoClicar: () => aviso('Restaurada') } });
   document.getElementById('av-3').onclick = () => aviso('Não foi possível salvar', { tipo: 'erro' });
