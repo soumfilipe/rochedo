@@ -1,6 +1,6 @@
 {
   "name": "rochedo",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Rochedo: design system de Filipe Costa (variáveis, fontes, ícones e componentes em CSS puro).",
   "type": "module",
   "files": ["dist", "src"],

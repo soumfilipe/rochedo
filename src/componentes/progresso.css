@@ -1,0 +1,21 @@
+/* Progresso: quanto de algo já foi feito. Use <progress>, que já informa o valor a leitores de tela.
+   <progress class="ro-progresso" value="40" max="100" aria-label="livro lido"></progress>
+   ro-progresso--feito pinta de cor cheia (meta concluída). Sem value, fica indeterminado. */
+.ro-progresso {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  height: 6px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--ro-borda);
+  color: var(--ro-acento);
+  overflow: hidden;
+}
+.ro-progresso::-webkit-progress-bar { background: var(--ro-borda); }
+.ro-progresso::-webkit-progress-value { background: var(--ro-acento); border-radius: 3px; transition: width var(--ro-medio) var(--ro-easing); }
+.ro-progresso::-moz-progress-bar { background: var(--ro-acento); border-radius: 3px; }
+.ro-progresso--feito::-webkit-progress-value { background: var(--ro-sucesso); }
+.ro-progresso--feito::-moz-progress-bar { background: var(--ro-sucesso); }
+@media (prefers-reduced-motion: reduce) { .ro-progresso::-webkit-progress-value { transition: none; } }

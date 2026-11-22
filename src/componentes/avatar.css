@@ -1,0 +1,23 @@
+/* Avatar: imagem de uma pessoa ou conta, quadrada com cantos arredondados.
+   <img class="ro-avatar" src="…" alt="">           (alt vazio quando o nome aparece ao lado)
+   <span class="ro-avatar" aria-hidden="true">F</span>   (sem imagem: a inicial)
+   Tamanhos: --pequeno 24px, padrão 44px, --grande 72px. ro-avatar--redondo para círculo. */
+.ro-avatar {
+  flex: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--ro-superficie-2);
+  color: var(--ro-texto-forte-apoio);
+  font: 700 var(--ro-tam-corpo)/1 var(--ro-fonte-titulo);
+  text-transform: uppercase;
+  object-fit: cover;
+  overflow: hidden;
+}
+.ro-avatar--pequeno { width: 24px; height: 24px; border-radius: 6px; font-size: var(--ro-tam-micro); }
+.ro-avatar--grande { width: 72px; height: 72px; border-radius: 16px; font-size: var(--ro-tam-destaque); }
+.ro-avatar--redondo { border-radius: 50%; }

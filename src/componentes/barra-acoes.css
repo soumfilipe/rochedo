@@ -1,0 +1,23 @@
+/* Barra de ações: rodapé de um formulário ou editor, com a ação principal e as secundárias sempre à vista.
+   <div class="ro-barra-acoes">
+     <button class="ro-botao ro-botao--quieto">cancelar</button>
+     <button class="ro-botao ro-botao--principal">salvar</button>
+   </div>
+   Fica colada ao fim da tela (sticky) e respeita a área segura do iOS. ro-barra-acoes--fixa a prende à janela. */
+.ro-barra-acoes {
+  position: sticky;
+  bottom: 0;
+  z-index: 8;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ro-espaco-2);
+  padding: var(--ro-espaco-3) var(--ro-espaco-4) calc(var(--ro-espaco-3) + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--ro-fundo) 92%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--ro-borda);
+}
+.ro-barra-acoes--fixa { position: fixed; left: 0; right: 0; }
+.ro-barra-acoes > .ro-botao--principal { margin-left: auto; }

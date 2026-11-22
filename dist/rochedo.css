@@ -1,4 +1,4 @@
-/* Rochedo 0.11.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
+/* Rochedo 0.12.0 — design system de Filipe Costa. Gerado por scripts/build.mjs: não edite. */
 /* Bricolage Grotesque (títulos e texto) e JetBrains Mono (rótulos, handles, horários), licença OFL. */
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400; font-display: swap; src: url('fontes/bricolage-grotesque-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 700; font-display: swap; src: url('fontes/bricolage-grotesque-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -145,6 +145,30 @@
 .ro-abas--cheia { align-self: stretch; }
 .ro-abas--cheia > * { flex: 1; }
 
+/* Avatar: imagem de uma pessoa ou conta, quadrada com cantos arredondados.
+   <img class="ro-avatar" src="…" alt="">           (alt vazio quando o nome aparece ao lado)
+   <span class="ro-avatar" aria-hidden="true">F</span>   (sem imagem: a inicial)
+   Tamanhos: --pequeno 24px, padrão 44px, --grande 72px. ro-avatar--redondo para círculo. */
+.ro-avatar {
+  flex: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--ro-superficie-2);
+  color: var(--ro-texto-forte-apoio);
+  font: 700 var(--ro-tam-corpo)/1 var(--ro-fonte-titulo);
+  text-transform: uppercase;
+  object-fit: cover;
+  overflow: hidden;
+}
+.ro-avatar--pequeno { width: 24px; height: 24px; border-radius: 6px; font-size: var(--ro-tam-micro); }
+.ro-avatar--grande { width: 72px; height: 72px; border-radius: 16px; font-size: var(--ro-tam-destaque); }
+.ro-avatar--redondo { border-radius: 50%; }
+
 /* Aviso rápido (toast) — confirma uma ação sem tirar o usuário do lugar.
    Use via aviso() de rochedo/aviso.js. Fica acima da barra inferior, some sozinho,
    aceita uma ação ("desfazer") e é anunciado por leitores de tela (role=status; erro usa role=alert). */
@@ -195,6 +219,30 @@
 .ro-aviso--saindo { opacity: 0; transform: translateY(8px); transition: opacity var(--ro-rapido), transform var(--ro-rapido); }
 @keyframes ro-aviso-entra { from { opacity: 0; transform: translateY(8px); } }
 @media (prefers-reduced-motion: reduce) { .ro-aviso { animation: none; } .ro-aviso--saindo { transition: none; } }
+
+/* Barra de ações: rodapé de um formulário ou editor, com a ação principal e as secundárias sempre à vista.
+   <div class="ro-barra-acoes">
+     <button class="ro-botao ro-botao--quieto">cancelar</button>
+     <button class="ro-botao ro-botao--principal">salvar</button>
+   </div>
+   Fica colada ao fim da tela (sticky) e respeita a área segura do iOS. ro-barra-acoes--fixa a prende à janela. */
+.ro-barra-acoes {
+  position: sticky;
+  bottom: 0;
+  z-index: 8;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ro-espaco-2);
+  padding: var(--ro-espaco-3) var(--ro-espaco-4) calc(var(--ro-espaco-3) + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--ro-fundo) 92%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--ro-borda);
+}
+.ro-barra-acoes--fixa { position: fixed; left: 0; right: 0; }
+.ro-barra-acoes > .ro-botao--principal { margin-left: auto; }
 
 /* Barra de navegação inferior, com uma ação central opcional. Cada item é um link; a página atual leva aria-current="page".
    <nav class="ro-barra" aria-label="Navegação principal">
@@ -388,6 +436,59 @@
 }
 .ro-cabecalho--barra .ro-cabecalho__acoes { margin-left: auto; }
 
+/* Caixa: marca uma escolha dentro de um formulário (não vale na hora; para isso, use o interruptor).
+   Checkbox: várias respostas possíveis. Radio: uma só dentre várias.
+   <label class="ro-opcao"><input class="ro-caixa" type="checkbox"> pedir foto como evidência</label>
+   <label class="ro-opcao"><input class="ro-caixa" type="radio" name="tema" value="claro"> claro</label>
+   A .ro-opcao é a linha de 44 px: o toque vale para ela toda. */
+.ro-opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--ro-espaco-3);
+  min-height: var(--ro-alvo);
+  color: var(--ro-texto);
+  font: 400 var(--ro-tam-corpo)/1.4 var(--ro-fonte-titulo);
+  cursor: pointer;
+}
+.ro-caixa {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border: 2px solid var(--ro-apoio);
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--ro-rapido) var(--ro-easing), border-color var(--ro-rapido);
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-caixa[type='radio'] { border-radius: 50%; }
+.ro-caixa:checked { background: var(--ro-acento); border-color: var(--ro-acento); }
+.ro-caixa[type='checkbox']:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--ro-sobre-acento);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+.ro-caixa[type='radio']:checked::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--ro-sobre-acento);
+}
+.ro-caixa:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
+.ro-caixa:disabled { opacity: 0.45; cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) { .ro-caixa { transition: none; } }
+
 /* Campos de formulário.
    <label class="ro-campo">
      <span class="ro-campo__rotulo">título</span>
@@ -508,6 +609,33 @@ label.ro-chip { position: relative; }
 .ro-carregando > i:nth-child(3) { width: 55%; animation-delay: 0.3s; }
 @keyframes ro-pulsa { 50% { opacity: 0.45; } }
 @media (prefers-reduced-motion: reduce) { .ro-carregando > i { animation: none; } }
+
+/* Fab: a ação principal da tela, redonda e flutuante (escrever, capturar, criar).
+   <button class="ro-fab" aria-label="escrever"><svg …/></button>
+   Fica acima da barra de navegação (usa --ro-barra-altura). Um por tela. */
+.ro-fab {
+  position: fixed;
+  right: var(--ro-espaco-4);
+  bottom: calc(var(--ro-barra-altura, 64px) + env(safe-area-inset-bottom) + var(--ro-espaco-4));
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ro-acento);
+  color: var(--ro-sobre-acento);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--ro-noite) 45%, transparent);
+  cursor: pointer;
+  transition: transform var(--ro-rapido) var(--ro-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-fab:active { transform: scale(0.94); }
+.ro-fab:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 3px; }
+.ro-fab[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .ro-fab { transition: none; } }
 
 /* Faixa: mensagem que fica na tela até o problema passar (diferente do aviso, que some sozinho).
    Serve para falha de sincronização, formulário com erro, conexão perdida.
@@ -705,6 +833,28 @@ a.ro-linha:active, button.ro-linha:active { opacity: 0.7; }
 .ro-perigo[data-confirmando] { background: var(--ro-perigo); color: var(--ro-fundo); animation: ro-sacode 200ms var(--ro-easing); }
 @keyframes ro-sacode { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 @media (prefers-reduced-motion: reduce) { .ro-perigo[data-confirmando] { animation: none; } }
+
+/* Progresso: quanto de algo já foi feito. Use <progress>, que já informa o valor a leitores de tela.
+   <progress class="ro-progresso" value="40" max="100" aria-label="livro lido"></progress>
+   ro-progresso--feito pinta de cor cheia (meta concluída). Sem value, fica indeterminado. */
+.ro-progresso {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  height: 6px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--ro-borda);
+  color: var(--ro-acento);
+  overflow: hidden;
+}
+.ro-progresso::-webkit-progress-bar { background: var(--ro-borda); }
+.ro-progresso::-webkit-progress-value { background: var(--ro-acento); border-radius: 3px; transition: width var(--ro-medio) var(--ro-easing); }
+.ro-progresso::-moz-progress-bar { background: var(--ro-acento); border-radius: 3px; }
+.ro-progresso--feito::-webkit-progress-value { background: var(--ro-sucesso); }
+.ro-progresso--feito::-moz-progress-bar { background: var(--ro-sucesso); }
+@media (prefers-reduced-motion: reduce) { .ro-progresso::-webkit-progress-value { transition: none; } }
 
 /* Rótulo de seção: mono, caixa alta, 12 px, cor de apoio. "INBOX · 7 ITENS".
    <p class="ro-rotulo">hábitos</p>   (ou <h2 class="ro-rotulo">). O rótulo de campo é outro: .ro-campo__rotulo. */

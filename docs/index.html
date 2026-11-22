@@ -260,6 +260,51 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
   </section>
 
   <section>
+    <h2>caixa</h2>
+    <p>Marca uma escolha dentro de um formulário: checkbox para várias respostas, radio para uma só. O <code>ro-opcao</code> é a linha de 44 px e o toque vale para ela toda. Para algo que vale na hora, use o interruptor.</p>
+    <div class="cartao" style="display:flex;flex-direction:column">
+      <label class="ro-opcao"><input class="ro-caixa" type="checkbox" checked> pedir foto como evidência</label>
+      <label class="ro-opcao"><input class="ro-caixa" type="checkbox"> pedir um texto ao registrar</label>
+      <label class="ro-opcao"><input class="ro-caixa" type="radio" name="cx" checked> escuro</label>
+      <label class="ro-opcao"><input class="ro-caixa" type="radio" name="cx"> claro</label>
+    </div>
+  </section>
+
+  <section>
+    <h2>avatar</h2>
+    <p>Quadrado de cantos arredondados (<code>--redondo</code> para círculo), em três tamanhos. Sem imagem, mostra a inicial. Com o nome ao lado, o <code>alt</code> fica vazio.</p>
+    <div class="cartao" style="display:flex;gap:12px;align-items:center">
+      <div style="display:flex;gap:12px;align-items:center"><span class="ro-avatar ro-avatar--pequeno" aria-hidden="true">f</span>
+      <span class="ro-avatar" aria-hidden="true">a</span>
+      <span class="ro-avatar ro-avatar--grande" aria-hidden="true">f</span>
+      <span class="ro-avatar ro-avatar--redondo" aria-hidden="true">f</span>
+    </div></div>
+  </section>
+
+  <section>
+    <h2>progresso</h2>
+    <p>Um <code>&lt;progress&gt;</code> estilizado, que já informa o valor a leitores de tela. <code>--feito</code> pinta de verde quando a meta fecha.</p>
+    <div class="cartao" style="display:flex;flex-direction:column;gap:12px">
+      <progress class="ro-progresso" value="40" max="100" aria-label="livro lido"></progress>
+      <progress class="ro-progresso ro-progresso--feito" value="100" max="100" aria-label="meta cumprida"></progress>
+    </div>
+  </section>
+
+  <section>
+    <h2>fab</h2>
+    <p>A ação principal da tela, redonda e flutuante, acima da barra de navegação. Um por tela. Abaixo ele está estático só para a demonstração.</p>
+    <div class="cartao"><button class="ro-fab" id="fab-1" type="button" aria-label="escrever" style="position:static"></button></div>
+  </section>
+
+  <section>
+    <h2>barra de ações</h2>
+    <p>Rodapé de formulário com a ação principal sempre à vista. Sticky, respeita a área segura do iOS; <code>--fixa</code> prende na janela.</p>
+    <div class="cartao" style="padding:0;overflow:hidden">
+      <div class="ro-barra-acoes" style="position:static"><button class="ro-botao ro-botao--quieto" type="button">cancelar</button><button class="ro-botao ro-botao--principal" type="button">salvar</button></div>
+    </div>
+  </section>
+
+  <section>
     <h2>folha</h2>
     <p>Painel que sobe de baixo no celular (diálogo centrado em tela larga). Serve para menu de ações de um item ou para um formulário curto. ESC e toque no fundo fecham; destrutivo por último; sempre “Cancelar”.</p>
     <div class="cartao">
@@ -292,6 +337,7 @@ abrirFolha({ titulo: 'Livro', itens: [
   document.querySelector('#ca-1').append(icone('search', 20)); document.querySelector('#ca-2').append(icone('back', 22));
   document.querySelectorAll('#ba-1 .ro-barra__icone').forEach((el, i) => el.prepend(icone(['home', 'notifications', 'clock', 'bookmark'][i], 24)));
   document.querySelector('#ba-1 .ro-barra__acao').append(icone('add', 26));
+  document.getElementById('fab-1').append(icone('edit', 24));
   import { confirmar } from '../dist/confirmar.js';
   confirmar(document.getElementById('apagar'), () => aviso('Apagado (de mentira)'), { rotulo: 'toque de novo para apagar' });
   document.getElementById('av-1').onclick = () => aviso('Nota salva');

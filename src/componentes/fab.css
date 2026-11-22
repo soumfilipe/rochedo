@@ -1,0 +1,26 @@
+/* Fab: a ação principal da tela, redonda e flutuante (escrever, capturar, criar).
+   <button class="ro-fab" aria-label="escrever"><svg …/></button>
+   Fica acima da barra de navegação (usa --ro-barra-altura). Um por tela. */
+.ro-fab {
+  position: fixed;
+  right: var(--ro-espaco-4);
+  bottom: calc(var(--ro-barra-altura, 64px) + env(safe-area-inset-bottom) + var(--ro-espaco-4));
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ro-acento);
+  color: var(--ro-sobre-acento);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--ro-noite) 45%, transparent);
+  cursor: pointer;
+  transition: transform var(--ro-rapido) var(--ro-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+.ro-fab:active { transform: scale(0.94); }
+.ro-fab:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 3px; }
+.ro-fab[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .ro-fab { transition: none; } }

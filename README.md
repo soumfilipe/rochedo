@@ -16,6 +16,11 @@ Documentação ao vivo: `docs/index.html` (publicada no GitHub Pages, em `/docs/
 | Rótulo | `rotulo.css` | `.ro-rotulo`: rótulo de seção em mono |
 | Cabeçalho | `cabecalho.css` | `.ro-cabecalho`: título de tela com cursor ▌; `--barra` para a barra de topo |
 | Cartão | `cartao.css` | `.ro-cartao` (`--preenchido`, `--clicavel`) |
+| Caixa | `caixa.css` | `.ro-caixa` (checkbox/radio) dentro de `.ro-opcao` |
+| Avatar | `avatar.css` | `.ro-avatar` (`--pequeno`, `--grande`, `--redondo`) |
+| Progresso | `progresso.css` | `.ro-progresso` sobre `<progress>`; `--feito` |
+| Fab | `fab.css` | `.ro-fab`: ação principal flutuante |
+| Barra de ações | `barra-acoes.css` | `.ro-barra-acoes`: rodapé de formulário |
 | Barra | `barra.css` | `.ro-barra`: navegação inferior com ação central; `--lateral` a partir de 768 px |
 | Seletor | `seletor.css` | `.ro-seletor`: `select` nativo estilizado; `--compacto` para uso em frase |
 | Faixa | `faixa.css` | `.ro-faixa` (`--erro`): mensagem fixa até o problema passar, com ação opcional |
