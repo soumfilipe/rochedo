@@ -1,6 +1,8 @@
 /* Chip de filtro: escolhe um recorte dentro de uma lista (não navega entre telas: isso é .ro-abas).
    <button class="ro-chip" aria-pressed="true">lendo</button>
-   Vários ficam num <div class="ro-chips"> que quebra linha. O estado ligado vem de aria-pressed="true". */
+   Vários ficam num <div class="ro-chips"> que quebra linha. O estado ligado vem de aria-pressed="true".
+   Escolha de formulário (radio ou checkbox): <label class="ro-chip"><input type="radio" name="freq" value="diaria">todo dia</label>;
+   o input fica escondido e o chip liga com :checked. */
 .ro-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .ro-chip {
   display: inline-flex;
@@ -21,3 +23,10 @@
 .ro-chip[aria-pressed='true'] { background: var(--ro-texto); border-color: var(--ro-texto); color: var(--ro-fundo); font-weight: 700; }
 .ro-chip:focus-visible { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
 .ro-chip:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* variante em <label> com radio/checkbox escondido */
+label.ro-chip { position: relative; }
+.ro-chip > input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.ro-chip:has(> input:checked) { background: var(--ro-texto); border-color: var(--ro-texto); color: var(--ro-fundo); font-weight: 700; }
+.ro-chip:has(> input:focus-visible) { outline: 2px solid var(--ro-foco); outline-offset: 2px; }
+.ro-chip:has(> input:disabled) { opacity: 0.45; cursor: not-allowed; }

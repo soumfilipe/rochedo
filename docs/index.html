@@ -28,7 +28,7 @@
 <main>
   <header>
     <div class="barra">
-      <h2 style="margin:0">rochedo · v0.6</h2>
+      <h2 style="margin:0">rochedo · v0.7</h2>
       <button class="botao" id="tema" type="button">tema: auto</button>
     </div>
     <h1>Rochedo</h1>
@@ -170,6 +170,12 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
         <button class="ro-chip" type="button" aria-pressed="false">lidos <span class="ro-selo">8</span></button>
         <button class="ro-chip" type="button" aria-pressed="false">abandonados</button>
       </div>
+      <p style="margin:0">Em formulário, com radio ou checkbox:</p>
+      <div class="ro-chips">
+        <label class="ro-chip"><input type="radio" name="freq" value="d" checked>todo dia</label>
+        <label class="ro-chip"><input type="radio" name="freq" value="s">algumas vezes por semana</label>
+        <label class="ro-chip"><input type="checkbox">prioridade</label>
+      </div>
     </div>
   </section>
 
@@ -183,7 +189,7 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
     <h2>como usar</h2>
     <ul>
       <li>Sem build: copie <code>dist/</code> para o projeto e ligue <code>rochedo.css</code>.</li>
-      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.6.0</code> e <code>import 'rochedo'</code>.</li>
+      <li>Com build: <code>npm i github:soumfilipe/rochedo#v0.7.0</code> e <code>import 'rochedo'</code>.</li>
       <li>Ícones: <code>import { icone } from 'rochedo/icones.js'</code>.</li>
       <li>Tema: automático pela preferência do sistema, ou <code>&lt;html data-tema="claro|escuro"&gt;</code>.</li>
     </ul>
