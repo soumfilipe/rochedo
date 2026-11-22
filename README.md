@@ -13,6 +13,7 @@ Documentação ao vivo: `docs/index.html` (publicada no GitHub Pages, em `/docs/
 | Aviso (JS) | `dist/aviso.js` | `aviso(texto, { tipo, duracao, acao })` |
 | Confirmar (JS) | `dist/confirmar.js` | `confirmar(botao, aoConfirmar, { rotulo, tempo })`: dois toques |
 | Folha (JS) | `dist/folha.js` + `folha.css` | `abrirFolha({ titulo, itens, conteudo })`: menu de ações ou formulário curto |
+| Seletor | `seletor.css` | `.ro-seletor`: `select` nativo estilizado; `--compacto` para uso em frase |
 | Faixa | `faixa.css` | `.ro-faixa` (`--erro`): mensagem fixa até o problema passar, com ação opcional |
 | Ícones | `dist/icones.js` | Hugeicons (versão gratuita, MIT): `icone(nome, tamanho)` devolve um `<svg>` |
 | Componentes | `dist/rochedo.css` | tudo junto (fontes + variáveis + componentes). Hoje: **abas**, **linha de lista**, **chips de filtro**, **selo**, **botões**, **campos**, **interruptor**, **aviso rápido**, **estados** (vazio/erro/carregando) e **ação destrutiva** |
@@ -26,7 +27,7 @@ Todo nome começa com `ro-` (`--ro-acento`, `.ro-abas`), para não colidir com o
 **Com build** (ex.: Life OS):
 
 ```sh
-npm i github:soumfilipe/rochedo#v0.9.0
+npm i github:soumfilipe/rochedo#v0.10.0
 ```
 
 ```js
@@ -60,7 +61,7 @@ Cada mudança sai com tag semântica (`v0.2.0`). Projetos fixam a versão e só 
 
 ## Próximos componentes
 
-Faixa de aviso, seletor.
+Linha de lista nos apps.
 
 ## Licenças
 

@@ -199,6 +199,20 @@ confirmar(botao, () => apagar(id), { rotulo: 'toque de novo para apagar' });</pr
   </section>
 
   <section>
+    <h2>seletor</h2>
+    <p>O <code>select</code> nativo com a cara do sistema: no celular abre a roleta do aparelho. Para até quatro opções, prefira chips; o seletor serve para listas longas ou dinâmicas.</p>
+    <div class="cartao" style="display:flex;flex-direction:column;gap:12px">
+      <label class="ro-campo"><span class="ro-campo__rotulo">objetivo</span>
+        <select class="ro-seletor" id="se-1"><option>nenhum</option><option>Ler 12 livros</option><option>Correr 10 km</option></select></label>
+      <label style="display:flex;align-items:center;gap:8px"><select class="ro-seletor ro-seletor--compacto" aria-label="vezes por semana"><option>1</option><option selected>3</option><option>5</option></select> vezes por semana</label>
+<pre>&lt;label class="ro-campo"&gt;
+  &lt;span class="ro-campo__rotulo"&gt;objetivo&lt;/span&gt;
+  &lt;select class="ro-seletor"&gt;…&lt;/select&gt;
+&lt;/label&gt;</pre>
+    </div>
+  </section>
+
+  <section>
     <h2>folha</h2>
     <p>Painel que sobe de baixo no celular (diálogo centrado em tela larga). Serve para menu de ações de um item ou para um formulário curto. ESC e toque no fundo fecham; destrutivo por último; sempre “Cancelar”.</p>
     <div class="cartao">
